@@ -1,0 +1,42 @@
+---
+const year = new Date().getFullYear();
+---
+
+<footer
+  class="w-full border-t-[2.5px] mt-auto"
+  style="border-color: var(--color-border);"
+>
+  <div class="max-w-2xl mx-auto px-5 py-6">
+    <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+      <span
+        class="text-sm font-[family-name:var(--font-label)]"
+        style="color: var(--color-ink-muted);"
+      >
+        &copy; {year} Sid Gangal
+      </span>
+      <div class="flex gap-4">
+        <a
+          href="/build"
+          class="text-sm font-[family-name:var(--font-label)] no-underline"
+          style="color: var(--color-build);"
+        >
+          Build
+        </a>
+        <a
+          href="/invest"
+          class="text-sm font-[family-name:var(--font-label)] no-underline"
+          style="color: var(--color-invest);"
+        >
+          Invest
+        </a>
+        <a
+          href="/thrive"
+          class="text-sm font-[family-name:var(--font-label)] no-underline"
+          style="color: var(--color-thrive);"
+        >
+          Thrive
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>

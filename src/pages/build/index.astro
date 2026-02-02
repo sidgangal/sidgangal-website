@@ -1,0 +1,38 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostCard from '../../components/PostCard.astro';
+
+const posts = (await getCollection('build'))
+  .sort((a, b) => new Date(b.data.publishedAt).getTime() - new Date(a.data.publishedAt).getTime());
+---
+
+<BaseLayout title="Build" description="Startups, products, and the craft of creation.">
+  <header class="mb-8">
+    <h1
+      class="text-4xl mb-2"
+      style="font-family: var(--font-heading); color: var(--color-build);"
+    >
+      Build
+    </h1>
+    <p style="color: var(--color-ink-light);">
+      Startups, products, and the craft of creation.
+    </p>
+  </header>
+
+  {posts.length > 0 ? (
+    <ul class="list-none m-0 p-0">
+      {posts.map((post) => (
+        <PostCard
+          title={post.data.title}
+          href={`/build/${post.data.slug}`}
+          pillar="build"
+          publishedAt={post.data.publishedAt.toISOString()}
+          showPillarTag={false}
+        />
+      ))}
+    </ul>
+  ) : (
+    <p style="color: var(--color-ink-muted);">No posts yet.</p>
+  )}
+</BaseLayout>

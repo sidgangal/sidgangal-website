@@ -1,0 +1,23 @@
+{
+  "name": "personal-website",
+  "type": "module",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "astro": "^5.7.10",
+    "@astrojs/mdx": "^4.3.0",
+    "@astrojs/sitemap": "^3.3.1",
+    "@astrojs/react": "^4.2.1",
+    "@keystatic/core": "^0.5.46",
+    "@keystatic/astro": "^5.0.3",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "tailwindcss": "^4.1.14",
+    "@tailwindcss/vite": "^4.1.14",
+    "@tailwindcss/typography": "^0.5.16"
+  }
+}

@@ -1,0 +1,58 @@
+---
+import BaseLayout from './BaseLayout.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  pillar: 'build' | 'invest' | 'thrive';
+  publishedAt: string;
+  topics?: string[];
+}
+
+const { title, description, pillar, publishedAt, topics = [] } = Astro.props;
+
+const dateFormatted = new Date(publishedAt).toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+
+<BaseLayout title={title} description={description}>
+  <article>
+    <header class="mb-10">
+      <div class="flex items-center gap-3 mb-4">
+        <a href={`/${pillar}`} class={`pillar-tag pillar-tag--${pillar} no-underline`}>
+          {pillar}
+        </a>
+        <span
+          class="text-sm font-[family-name:var(--font-label)]"
+          style="color: var(--color-ink-muted);"
+        >
+          {dateFormatted}
+        </span>
+      </div>
+      <h1 class="text-4xl md:text-5xl mb-3" style="font-family: var(--font-heading);">
+        {title}
+      </h1>
+      <p style="color: var(--color-ink-light); font-size: 1.1rem;">
+        {description}
+      </p>
+      {topics.length > 0 && (
+        <div class="flex flex-wrap gap-2 mt-4">
+          {topics.map((topic) => (
+            <span
+              class="text-xs px-2 py-0.5 font-[family-name:var(--font-label)]"
+              style="background: var(--color-parchment-dark); color: var(--color-ink-muted);"
+            >
+              {topic}
+            </span>
+          ))}
+        </div>
+      )}
+    </header>
+    <div class="prose">
+      <slot />
+    </div>
+  </article>
+</BaseLayout>

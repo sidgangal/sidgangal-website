@@ -1,0 +1,62 @@
+---
+import PostCard from './PostCard.astro';
+
+interface Post {
+  title: string;
+  slug: string;
+  pillar: string;
+  publishedAt: string;
+  description?: string;
+}
+
+interface Props {
+  pillar: 'build' | 'invest' | 'thrive';
+  description: string;
+  posts: Post[];
+}
+
+const { pillar, description, posts } = Astro.props;
+
+const pillarLabels = {
+  build: 'Build',
+  invest: 'Invest',
+  thrive: 'Thrive',
+};
+---
+
+<section class="mb-10">
+  <div class="flex items-baseline gap-3 mb-2">
+    <h2 class="text-2xl m-0" style="font-family: var(--font-heading);">
+      <a
+        href={`/${pillar}`}
+        class="no-underline"
+        style={`color: var(--color-${pillar});`}
+      >
+        {pillarLabels[pillar]}
+      </a>
+    </h2>
+    <span
+      class="text-sm font-[family-name:var(--font-label)]"
+      style="color: var(--color-ink-muted);"
+    >
+      &mdash; {description}
+    </span>
+  </div>
+  {posts.length > 0 ? (
+    <ul class="list-none m-0 p-0">
+      {posts.map((post) => (
+        <PostCard
+          title={post.title}
+          href={`/${pillar}/${post.slug}`}
+          pillar={pillar}
+          publishedAt={post.publishedAt}
+          showPillarTag={false}
+        />
+      ))}
+    </ul>
+  ) : (
+    <p class="text-sm" style="color: var(--color-ink-muted);">
+      Coming soon.
+    </p>
+  )}
+</section>

@@ -1,0 +1,51 @@
+---
+const navItems = [
+  { label: 'Build', href: '/build' },
+  { label: 'Invest', href: '/invest' },
+  { label: 'Thrive', href: '/thrive' },
+  { label: 'About', href: '/about' },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<header class="w-full border-b-[2.5px]" style="border-color: var(--color-border);">
+  <div class="max-w-2xl mx-auto px-5 py-6">
+    <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+      <a href="/" class="no-underline group">
+        <h1
+          class="text-2xl m-0 leading-none"
+          style="font-family: var(--font-heading); color: var(--color-ink);"
+        >
+          Sid Gangal
+        </h1>
+      </a>
+      <nav>
+        <ul class="flex gap-5 list-none m-0 p-0">
+          {navItems.map(({ label, href }) => {
+            const isActive = currentPath.startsWith(href);
+            const pillarClass = label.toLowerCase();
+            return (
+              <li>
+                <a
+                  href={href}
+                  class:list={[
+                    'no-underline font-[family-name:var(--font-label)] text-sm font-600 tracking-wide uppercase',
+                    isActive && 'border-b-[2.5px]',
+                    !isActive && 'hover:opacity-70',
+                  ]}
+                  style={isActive
+                    ? `color: var(--color-${pillarClass}, var(--color-ink)); border-color: var(--color-${pillarClass}, var(--color-ink));`
+                    : `color: var(--color-ink-muted);`
+                  }
+                >
+                  {label}
+                </a>
+              </li>
+            );
+          })}
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>
