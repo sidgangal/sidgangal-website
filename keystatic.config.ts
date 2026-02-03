@@ -1,4 +1,4 @@
-import { config, fields, collection } from '@keystatic/core';
+import { config, fields, collection, singleton } from '@keystatic/core';
 
 const pillarOptions = [
   { label: 'Build', value: 'build' },
@@ -42,5 +42,32 @@ export default config({
     build: postCollection('build'),
     invest: postCollection('invest'),
     thrive: postCollection('thrive'),
+  },
+  singletons: {
+    homepage: singleton({
+      label: 'Homepage',
+      path: 'content/pages/homepage',
+      format: { data: 'yaml' },
+      schema: {
+        heroText: fields.text({
+          label: 'Hero Text',
+          multiline: true,
+        }),
+        buildDescription: fields.text({ label: 'Build Pillar Description' }),
+        investDescription: fields.text({ label: 'Invest Pillar Description' }),
+        thriveDescription: fields.text({ label: 'Thrive Pillar Description' }),
+      },
+    }),
+    about: singleton({
+      label: 'About Page',
+      path: 'content/pages/about',
+      format: { contentField: 'content' },
+      entryLayout: 'content',
+      schema: {
+        title: fields.text({ label: 'Title' }),
+        description: fields.text({ label: 'Meta Description', multiline: true }),
+        content: fields.mdx({ label: 'Content' }),
+      },
+    }),
   },
 });

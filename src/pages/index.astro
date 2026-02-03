@@ -1,9 +1,14 @@
 ---
 import { getCollection } from 'astro:content';
+import { createReader } from '@keystatic/core/reader';
+import keystaticConfig from '../../keystatic.config';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/Hero.astro';
 import PostCard from '../components/PostCard.astro';
 import PillarSection from '../components/PillarSection.astro';
+
+const reader = createReader(process.cwd(), keystaticConfig);
+const homepage = await reader.singletons.homepage.read();
 
 const buildPosts = await getCollection('build');
 const investPosts = await getCollection('invest');
@@ -33,7 +38,7 @@ function toPost(entry: typeof allPosts[number]) {
 ---
 
 <BaseLayout title="Home">
-  <Hero />
+  <Hero text={homepage?.heroText} />
 
   <!-- Recent posts -->
   <section class="mb-14">
@@ -72,17 +77,17 @@ function toPost(entry: typeof allPosts[number]) {
   >
     <PillarSection
       pillar="build"
-      description="Startups, products, and the craft of creation"
+      description={homepage?.buildDescription || "Startups, products, and the craft of creation"}
       posts={buildPosts.map(toPost)}
     />
     <PillarSection
       pillar="invest"
-      description="Markets, money, and long-term wealth"
+      description={homepage?.investDescription || "Markets, money, and long-term wealth"}
       posts={investPosts.map(toPost)}
     />
     <PillarSection
       pillar="thrive"
-      description="Health, energy, and sustainable performance"
+      description={homepage?.thriveDescription || "Health, energy, and sustainable performance"}
       posts={thrivePosts.map(toPost)}
     />
   </div>

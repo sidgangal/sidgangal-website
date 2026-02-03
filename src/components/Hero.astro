@@ -1,5 +1,15 @@
+---
+interface Props {
+  text?: string;
+}
+
+const { text } = Astro.props;
+
+const defaultText = "I built a company for seven years, sold it, and learned that the same principles that grow startups also grow wealth and health. This is where I write about all three—and how they compound together.";
+---
+
 <section class="mb-12 pb-10 border-b-[2.5px]" style="border-color: var(--color-border-light);">
   <p class="text-lg leading-relaxed m-0" style="color: var(--color-ink-light);">
-    I built a company for seven years, sold it, and learned that the same principles that grow startups also grow wealth and health. This is where I write about all three—and how they compound together.
+    {text || defaultText}
   </p>
 </section>
