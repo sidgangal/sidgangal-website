@@ -15,9 +15,20 @@ const posts = (await getCollection('invest'))
     >
       Invest
     </h1>
-    <p style="color: var(--color-ink-light);">
+    <p style="color: var(--color-ink-light);" class="mb-4">
       Markets, money, and long-term wealth building.
     </p>
+    <div class="prose prose-sm mb-6" style="color: var(--color-ink-muted);">
+      <p>
+        After selling my company, I had capital to deploy and zero experience in public markets. I spent a year studying while everyone else was buying into the 2022 euphoria. When markets crashed, I deployed.
+      </p>
+      <p>
+        This is where I share my research—deep dives on companies I find interesting, frameworks for thinking about markets, and lessons from both wins and expensive mistakes (Bitcoin, Ethereum, and a startup that went belly up all taught me something).
+      </p>
+      <p>
+        My approach: understand what you own, be patient in deployment, and never panic in drawdowns because you've done the work.
+      </p>
+    </div>
   </header>
 
   {posts.length > 0 ? (
