@@ -14,7 +14,7 @@ if (!isProduction) {
 }
 
 export default defineConfig({
-  site: 'https://sidgangal.com',
+  site: 'https://theusefulstack.com',
   integrations,
   vite: {
     plugins: [tailwindcss()],
