@@ -7,7 +7,7 @@ const posts = (await getCollection('thrive'))
   .sort((a, b) => new Date(b.data.publishedAt).getTime() - new Date(a.data.publishedAt).getTime());
 ---
 
-<BaseLayout title="Thrive" description="Health, energy, and sustainable performance.">
+<BaseLayout title="Thrive" description="Sleep, nutrition, exercise, and sustainable high performance.">
   <header class="mb-8">
     <h1
       class="text-4xl mb-2"
@@ -15,9 +15,20 @@ const posts = (await getCollection('thrive'))
     >
       Thrive
     </h1>
-    <p style="color: var(--color-ink-light);">
-      Health, energy, and sustainable performance.
+    <p style="color: var(--color-ink-light);" class="mb-4">
+      Sleep, nutrition, exercise, and sustainable high performance.
     </p>
+    <div class="prose prose-sm mb-6" style="color: var(--color-ink-muted);">
+      <p>
+        Seven years of startup grind left me chubby, unfit, and with blood work that scared me—high cholesterol, critically low vitamins, and inflammation markers that were aging me from the inside.
+      </p>
+      <p>
+        Within a year of focused intervention, I brought my hsCRP from 1.6 to under 0.5. Now I'm studying longevity science from Peter Attia, David Sinclair, and Bryan Johnson—not to live forever, but to live well for as long as possible.
+      </p>
+      <p>
+        This is where I share what actually works, backed by science.
+      </p>
+    </div>
   </header>
 
   {posts.length > 0 ? (

@@ -15,9 +15,17 @@ const posts = (await getCollection('build'))
     >
       Build
     </h1>
-    <p style="color: var(--color-ink-light);">
+    <p style="color: var(--color-ink-light);" class="mb-4">
       Startups, products, and the craft of creation.
     </p>
+    <div class="prose prose-sm mb-6" style="color: var(--color-ink-muted);">
+      <p>
+        I started my first company in my final year of college. Seven years later, we exited to a US acquirer. Now I'm building again—an AI-native growth stack for B2B companies.
+      </p>
+      <p>
+        This is where I write about what I've learned: talking to customers before building, showing up consistently, managing the emotional rollercoaster, scaling teams across India and the US, and why action always trumps perfection.
+      </p>
+    </div>
   </header>
 
   {posts.length > 0 ? (
