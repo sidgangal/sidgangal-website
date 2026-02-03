@@ -10,11 +10,12 @@ function postCollection(pillar: string) {
   return collection({
     label: pillar.charAt(0).toUpperCase() + pillar.slice(1),
     slugField: 'title',
-    path: `content/posts/${pillar}/*/`,
+    path: `content/posts/${pillar}/*`,
     format: { contentField: 'content' },
     entryLayout: 'content',
     schema: {
       title: fields.slug({ name: { label: 'Title' } }),
+      slug: fields.text({ label: 'Slug' }),
       description: fields.text({
         label: 'Description',
         multiline: true,
