@@ -1,0 +1,177 @@
+---
+title: "Which Cloud Software Stocks Actually Benefit from AI? I Analyzed 30 Companies to Find Out"
+description: "Independent analysis of 30 cloud software companies from the BVP Emerging Cloud Index, scoring how AI impacts customer demand for each one."
+pillar: "invest"
+format: "Deep Dive"
+topics: ["stocks", "AI", "SaaS"]
+publishedAt: "2026-02-05"
+slug: "cloud-software-stocks-ai-analysis"
+---
+
+**Disclaimer: This article is for educational and informational purposes only. The author is not SEBI registered and this does not constitute investment advice or recommendations of any kind. Do your own research before making any investment decisions.**
+
+---
+
+Everyone says AI is good for software stocks. That's lazy thinking.
+
+The BVP Nasdaq Emerging Cloud Index dropped over 60% from its 2021 highs. The recovery has been uneven, and the narrative driving it - "AI changes everything" - doesn't actually tell you anything useful. Changes everything how? For whom? In what direction?
+
+I ran independent analyses on 30 cloud software companies from the Bessemer Venture Partners Emerging Cloud Index. For each one, I built out five arguments for why AI increases customer demand and five arguments for why it decreases demand. Then I scored each argument on strength and arrived at a net assessment.
+
+The results challenged several popular assumptions. Some obvious "AI winners" have serious vulnerabilities. Some boring names turned out to be better positioned than the market gives them credit for. And a few popular SaaS names face genuine demand destruction that most analysts are dancing around.
+
+Here's what I found.
+
+## The Framework: Four Forces That Separate Winners from Losers
+
+Before looking at individual companies, it helps to understand the four structural forces that keep showing up across every analysis.
+
+**Revenue Model Vulnerability.** Per-seat pricing is the most exposed model in a world where AI makes one person do the work of five. Consumption-based pricing (pay for data processed, queries run, events monitored) holds up better. Transaction-based pricing is the most resilient - AI doesn't reduce the number of contracts that need signing or payments that need processing.
+
+**Infrastructure vs. Application Layer.** Companies sitting closer to infrastructure - data pipelines, observability, security - tend to benefit because AI generates more data, more endpoints, more things to observe and protect. Application-layer companies (project management, CRM, marketing automation) face a different problem: AI can often replicate the application itself.
+
+**The Microsoft Problem.** Microsoft showed up as a competitive threat in nearly every bear case I wrote. Copilot embedded across Office 365, Dynamics, Azure, and Security. E5 licensing bundles "good enough" alternatives at zero marginal cost. If you're a SaaS company competing in a category where Microsoft has a product, you're swimming against a current.
+
+**Moat Type.** Not all competitive advantages hold up equally against AI. Regulatory moats (FDA validation, FedRAMP certifications) and physical moats (hardware deployed in customer locations) are nearly impervious to disruption. Data network effects strengthen with AI because more AI means more data. But brand moats and feature-set moats? Those are the ones AI erodes fastest.
+
+## The Companies That Clearly Benefit
+
+Four companies illustrate why the infrastructure layer wins.
+
+**CrowdStrike.** The cybersecurity arms race is the clearest AI demand story in software. Every AI model deployed into production creates new endpoints to protect. Every AI coding assistant generates code faster than humans can review it. Adversaries are using generative AI to craft polymorphic malware and hyper-personalized phishing at scale. CrowdStrike's threat intelligence documents breakout times - the gap between initial compromise and lateral movement - dropping below two minutes in some cases. Human analysts can't respond that fast. AI-native security platforms have to.
+
+The moat is the data. CrowdStrike monitors trillions of security events weekly across millions of endpoints. That proprietary threat graph gets smarter with every attack it sees. A startup can't replicate that by fine-tuning a foundation model on public threat feeds. The data is private, real-time, and compounding.
+
+**Datadog.** Here's a company where the pricing model perfectly aligns with AI tailwinds. Datadog charges based on data volume - hosts monitored, logs ingested, traces analyzed. Every AI workload an enterprise deploys generates telemetry that needs observing. More AI infrastructure means more things to monitor means more Datadog revenue. The company didn't even need to do anything special. Their existing business model captures AI growth automatically.
+
+But they did do something special. LLM Observability is an entirely new product category that didn't exist three years ago. Tracking model latency, token costs, hallucination rates, prompt injection attempts - this is net-new monitoring that enterprises building AI applications need. OpenTelemetry poses a long-term commoditization risk to the ingestion layer, but Datadog's value increasingly comes from the analytics and visualization on top, not just the pipes.
+
+**Rubrik.** Most people think of Rubrik as a backup company. That undersells what's happening. When enterprises deploy AI, their most valuable assets shift. It's no longer just customer databases and financial records. It's training datasets, model weights, fine-tuned adapters, and inference pipelines. These AI artifacts are expensive to create, impossible to reconstruct if lost, and increasingly targeted by attackers. Rubrik protects all of it.
+
+But the bigger story is Data Security Posture Management - DSPM. This is a category that barely existed before AI. Enterprises now need to know: where is our sensitive data? Who can access it? Is it being used to train models it shouldn't be? Are we exposing PII through AI inference endpoints? Rubrik's acquisition of Laminar in 2024 gave them a purpose-built DSPM platform. The companies building AI applications need to answer these questions for regulatory compliance alone. That creates demand that's mandatory, not discretionary.
+
+The competitive position is strong because Rubrik already sits on enterprise data. They see what's being backed up, what's changing, what's sensitive. Adding security intelligence on top of that existing data access is a natural extension, not a bolt-on. Competitors would need to get both the data access and the security layer right. Rubrik already has the first part.
+
+**Shopify.** This one surprised me. Most people bucket Shopify as e-commerce, not AI. But think about what AI tools actually enable. A single person with AI assistants can now handle product photography, copywriting, customer service, inventory forecasting, and ad optimization - tasks that used to require a small team. That means more people can viably start and run online businesses. Shopify's addressable market of potential merchants expands.
+
+And the pricing model is genius for this moment. Shopify earns transaction fees. They don't care how many humans are running the store. They care how much the store sells. If AI makes merchants more productive and their stores more profitable, Shopify captures that upside directly through higher GMV. It's one of the few cases where AI making workers more efficient actually helps the platform rather than hurting its seat count.
+
+## Net Positive, But Watch the Flanks
+
+These three companies benefit from AI, but each carries a specific competitive risk that could cap the upside.
+
+**MongoDB.** The bull case is real: vector search built natively into MongoDB Atlas means developers can build AI applications without adding a separate vector database. Consumption-based Atlas pricing benefits from growing data volumes. The developer community is massive and loyal.
+
+But I almost had this one lower. AI coding assistants make self-hosting MongoDB dramatically easier. What used to require a dedicated database admin can now be done by a developer asking Copilot to write the deployment scripts. One estimate puts the cost reduction at 4.5x. And then there's PostgreSQL with pgvector - an open-source alternative that's "good enough" for many AI workloads. MongoDB's convenience premium gets harder to justify when the alternative is free and increasingly capable. The bear case isn't that MongoDB goes away. It's that the pricing power erodes.
+
+**Toast.** This is the moat that AI can't touch. Toast has physical hardware - payment terminals, kitchen display systems, handheld ordering devices - deployed in over 120,000 restaurants. You can't disrupt that with a foundation model API. A restaurant switching from Toast means ripping out countertop equipment, retraining staff, and migrating transaction history. Nobody does that because ChatGPT got better.
+
+AI actually helps Toast. Demand forecasting, dynamic menu pricing, automated inventory management - these are features that increase platform stickiness and average revenue per location. The risk isn't AI disruption. It's execution risk on expanding into adjacent markets (payroll, catering, supply chain) where Toast doesn't have the same physical lock-in.
+
+**Okta.** Here's an angle most analysts miss. AI agents need identities. When an enterprise deploys autonomous AI agents that access databases, call APIs, and interact with other systems, each agent needs authenticated credentials with appropriate access controls. Non-human identity management is a new category of demand that didn't exist before AI agents. Okta's platform is naturally positioned to manage these machine identities alongside human ones.
+
+The problem is Microsoft Entra. It bundles identity management into E5 licensing. For enterprises already deep in the Microsoft ecosystem, Okta's premium pricing is a hard sell when a "good enough" alternative comes free. Okta needs to win on sophistication and multi-cloud capabilities. If Microsoft closes that gap, the non-human identity upside gets captured by someone else.
+
+**Zeta Global.** Most marketing platforms face AI headwinds - HubSpot is the starkest example. Zeta is the exception because its value isn't simplicity or features. It's data. The company owns a proprietary identity graph covering over 240 million American consumers, assembled through 15 years of acquisitions and compounding campaign signals. You can't replicate that with a ChatGPT prompt.
+
+AI actually makes Zeta's platform more effective, not less relevant. Better models extract more signal from the identity graph, improving personalization and prediction accuracy for every campaign. And the timing is good - third-party cookies are dying, which means the rented data most of the marketing industry relied on is disappearing. Zeta's first-party data asset becomes more valuable in a cookieless world, not less. That's a secular tailwind.
+
+The bear case is the walled gardens. Google and Meta keep improving their own AI-powered ad targeting inside their platforms. As those ecosystems get smarter, the incremental value of a third-party intelligence layer narrows for some use cases. Privacy regulation is the other risk - tightening restrictions on consumer data collection could constrain the very asset that gives Zeta its edge. But neither of those threats is as immediate as, say, the Microsoft bundling problem facing HubSpot or the technology obsolescence facing UiPath. The data moat is real, it compounds, and AI strengthens it.
+
+## The Contested Middle
+
+Some stocks sit in a zone where AI reshuffles the deck without clearly helping or hurting overall demand.
+
+**Salesforce.** The most debatable name on the list. Agentforce is the right strategic response - AI agents that can handle customer interactions, qualify leads, and manage cases without human intervention. Enterprise customers are genuinely interested.
+
+But the Klarna episode spooked the market. Klarna publicly announced it replaced Salesforce with AI-built internal tools, cutting costs dramatically. They partially walked that back, but the damage was done. It demonstrated that the "build vs. buy" calculus has shifted for well-resourced companies. And the per-seat pricing model faces structural pressure. If one account executive with AI tools can manage 300 accounts instead of 100, companies need fewer seats. Salesforce is transitioning toward consumption-based pricing, but that takes years and creates near-term revenue uncertainty. Microsoft Dynamics with Copilot attacks from below. The AI narrative helps Salesforce tell a growth story, but the underlying economics are genuinely uncertain.
+
+**Snowflake.** Snowflake's Cortex AI features are promising - bringing ML and LLM capabilities directly into the data warehouse. But Databricks was built AI-native from the start, while Snowflake is bolting AI onto a data warehousing foundation. That architectural difference matters.
+
+And then there's Apache Iceberg. Open table formats reduce data lock-in by letting customers store data in a vendor-neutral way. If your data isn't locked into Snowflake's proprietary format, switching costs drop. The consumption-based pricing model protects revenue (you pay for compute used, not seats), but the competitive moat is thinner than it was two years ago. Snowflake still has excellent execution and a strong customer base, but the "inevitable AI winner in data" narrative belongs more to Databricks right now.
+
+**Atlassian.** The Jevons Paradox argument is interesting here: if AI makes code cheaper to write, the total volume of code increases. More code means more repositories, more CI/CD pipelines, more tickets, more pull requests. Developer tool demand should grow, not shrink.
+
+But GitHub has 100 million developers and Copilot integrated natively. That's a distribution advantage Atlassian can't match. Jira is entrenched in enterprise workflows, and switching ITSM tooling is painful, so existing customers aren't leaving. The question is whether new teams choose Jira or go with AI-native project management tools that don't carry 20 years of accumulated complexity. Atlassian holds its position. Whether it grows meaningfully from AI is less clear.
+
+## The Stocks Facing AI Headwinds
+
+Three companies where AI structurally reduces customer demand for what they sell.
+
+**HubSpot.** HubSpot and Salesforce are both CRM companies. They compete directly. So why is Salesforce in the contested middle while HubSpot lands here? The difference comes down to customer segment and what the moat is made of.
+
+Salesforce sells to enterprises with deep workflow integration, thousands of custom objects, and switching costs measured in years of migration effort. That entrenchment buys time even as AI pressures per-seat pricing. HubSpot sells to SMBs on a different promise: making marketing, sales, and customer service simple enough that a small team can handle it. All-in-one. Easy to use. No technical skills required.
+
+AI does exactly that. An SMB founder with ChatGPT can write email sequences, build landing pages, score leads, and manage social media. Zapier connects the tools. The whole stack costs a fraction of HubSpot's pricing. The simplicity that made HubSpot valuable is precisely the capability AI replicates best. Mid-market customers face the same dynamic but with Microsoft Dynamics + Copilot bundling CRM at zero marginal cost.
+
+HubSpot knows this. They're investing heavily in AI features. But they're adding AI to a product that AI threatens to replace. The question isn't whether HubSpot survives - it will. The question is whether the addressable market of customers willing to pay HubSpot-level pricing shrinks over the next five years. I think it does.
+
+**UiPath.** Robotic Process Automation was built for a specific technological moment - when enterprise systems had terrible APIs and the only way to automate was to build bots that literally clicked buttons on screen. That moment is ending.
+
+AI agents don't need to scrape UIs. They can interact with APIs directly, reason about workflows, and handle exceptions that would break a brittle RPA bot. The substrate UiPath was built on - screen-level automation of legacy interfaces - becomes unnecessary as AI provides native system access. UiPath is trying to reposition as an "AI-powered automation platform," but that's a crowded space where Microsoft Power Automate, ServiceNow, and dozens of startups compete. The company's own scoring came out negative because the core product category is being obsoleted, not enhanced, by AI.
+
+**Five9.** Every AI voice agent deployed is one less Five9 seat sold. That's the entire story.
+
+Five9 sells contact center software. Their revenue grows when companies hire more human agents and need more seats. AI voice agents - which can handle routine calls, route complex ones to humans, and operate 24/7 - directly replace the human agents who occupy those seats. The total spending on customer service might stay constant or even grow, but it shifts from contact center seats to AI agent orchestration platforms. Five9 can try to become that orchestration platform, but that's a fundamentally different business than what they built.
+
+## Four Patterns Worth Noting
+
+After analyzing 30 companies, some patterns are hard to ignore.
+
+**Infrastructure always beats applications in AI transitions.** The companies providing the pipes - observability, security, data streaming - capture value more reliably than companies providing finished applications. This mirrors the cloud transition: cloud infrastructure providers outperformed cloud application vendors.
+
+**Microsoft is the universal bear case.** In 25 of 30 analyses, Microsoft appeared as a competitive threat. E5 licensing bundles security, analytics, CRM, HR tools, and AI copilots at zero marginal cost. Any SaaS company in a Microsoft-adjacent category faces this gravity.
+
+**Per-seat pricing is structurally vulnerable.** Companies charging per-user face a simple problem: AI makes each user more productive, companies need fewer users. The most resilient pricing models are consumption-based or transaction-based.
+
+**The type of moat matters more than its depth.** Regulatory moats (Veeva's FDA validation) and physical moats (Toast's restaurant hardware) are nearly impervious to AI. Data moats (CrowdStrike's threat graph) strengthen. Brand and feature moats (HubSpot, Asana) are the most exposed because AI replicates features and new entrants build brands quickly.
+
+## The Uncomfortable Truth
+
+The SaaS companies that thrive in an AI world are the ones selling into the *consequences* of AI adoption - more security threats, more data to manage, more compliance to enforce. The ones struggling are competing with AI's *capabilities* - writing content, managing projects, automating workflows.
+
+The infrastructure layer grows. The application layer gets compressed. And Microsoft looms over everything.
+
+Every bull case has a bear case. What I've laid out above represents one analytical framework among many. The market will ultimately decide, and the market has a habit of humbling anyone who thinks they've figured it out.
+
+## The Full Scorecard
+
+For reference, all 31 companies ranked by estimated AI demand impact:
+
+| Rank | Company | Ticker | Category |
+|------|---------|--------|----------|
+| 1 | CrowdStrike | CRWD | Cybersecurity |
+| 2 | Palo Alto Networks | PANW | Cybersecurity |
+| 3 | Rubrik | RBRK | Data Security |
+| 4 | Datadog | DDOG | Observability |
+| 5 | Palantir | PLTR | Data Analytics |
+| 6 | Shopify | SHOP | E-Commerce |
+| 7 | Veeva | VEEV | Life Sciences |
+| 8 | Okta | OKTA | Identity |
+| 9 | ServiceNow | NOW | ITSM |
+| 10 | Zeta Global | ZETA | Marketing Intelligence |
+| 11 | Cloudflare | NET | Edge/CDN |
+| 12 | Workday | WDAY | HCM/Finance |
+| 13 | Toast | TOST | Restaurant Tech |
+| 14 | MongoDB | MDB | Database |
+| 15 | Adobe | ADBE | Creative |
+| 16 | Zscaler | ZS | Cybersecurity |
+| 17 | Confluent | CFLT | Data Streaming |
+| 18 | Snowflake | SNOW | Data Warehouse |
+| 19 | Salesforce | CRM | CRM |
+| 20 | Atlassian | TEAM | Dev Tools |
+| 21 | SentinelOne | S | Cybersecurity |
+| 22 | Elastic | ESTC | Search/Analytics |
+| 23 | GitLab | GTLB | DevOps |
+| 24 | DocuSign | DOCU | E-Signature |
+| 25 | RingCentral | RNG | UCaaS |
+| 26 | Five9 | FIVN | Contact Center |
+| 27 | UiPath | PATH | RPA |
+| 28 | monday.com | MNDY | Work Management |
+| 29 | Sprinklr | CXM | CX Management |
+| 30 | Asana | ASAN | Work Management |
+| 31 | HubSpot | HUBS | CRM |
+
+---
+
+*This analysis is for educational and informational purposes only. It does not constitute financial advice, investment recommendations, or an offer to buy or sell any securities. The author is not a SEBI-registered financial advisor or licensed investment professional. The rankings and assessments reflect one analytical framework among many possible approaches and should not be interpreted as buy, sell, or hold signals. Always consult a qualified financial professional before making investment decisions. Past performance does not guarantee future results.*
