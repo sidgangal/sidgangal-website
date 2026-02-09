@@ -5,7 +5,11 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "preview": "astro preview"
+    "preview": "astro preview",
+    "social:generate": "node scripts/generate-social.js",
+    "social:recent": "node scripts/generate-social.js --recent",
+    "social:all": "node scripts/generate-social.js --all",
+    "images:generate": "node scripts/generate-og-images.js"
   },
   "dependencies": {
     "astro": "^5.7.10",

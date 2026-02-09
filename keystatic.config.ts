@@ -31,6 +31,19 @@ function postCollection(pillar: string) {
         itemLabel: (props) => props.value,
       }),
       publishedAt: fields.date({ label: 'Published date' }),
+      keywords: fields.array(fields.text({ label: 'Keyword' }), {
+        label: 'SEO Keywords',
+        itemLabel: (props) => props.value,
+        description: 'Optional keywords for search engines',
+      }),
+      updatedAt: fields.date({
+        label: 'Last Updated',
+        description: 'Optional — set when content is significantly updated',
+      }),
+      coverImage: fields.text({
+        label: 'Cover Image Path',
+        description: 'Optional custom OG image path (e.g. /images/my-post.png)',
+      }),
       content: fields.mdx({ label: 'Content' }),
     },
   });
@@ -49,10 +62,21 @@ export default config({
       path: 'content/pages/homepage',
       format: { data: 'yaml' },
       schema: {
+        heroHeadline: fields.text({
+          label: 'Hero Headline',
+          description: 'Short punchy headline (under 10 words)',
+        }),
         heroText: fields.text({
           label: 'Hero Text',
           multiline: true,
         }),
+        heroPrinciples: fields.array(
+          fields.text({ label: 'Principle' }),
+          {
+            label: 'Hero Principles',
+            itemLabel: (props) => props.value,
+          }
+        ),
         buildDescription: fields.text({ label: 'Build Pillar Description' }),
         investDescription: fields.text({ label: 'Invest Pillar Description' }),
         thriveDescription: fields.text({ label: 'Thrive Pillar Description' }),

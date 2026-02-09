@@ -20,6 +20,11 @@ const { Content } = await render(post);
   pillar="invest"
   publishedAt={post.data.publishedAt.toISOString()}
   topics={post.data.topics}
+  content={post.body}
+  slug={post.data.slug}
+  keywords={post.data.keywords}
+  updatedAt={post.data.updatedAt?.toISOString()}
+  coverImage={post.data.coverImage}
 >
   <Content />
 </PostLayout>

@@ -1,20 +1,55 @@
 ---
 interface Props {
+  headline?: string;
   text?: string;
+  principles?: string[];
 }
 
-const { text } = Astro.props;
+const { headline, text, principles } = Astro.props;
 
-const defaultText = "I built a company for seven years, sold it, and learned that the same principles that grow startups also grow wealth and health. This is where I write about all three—and how they compound together.";
+const defaultHeadline = "Fewer layers. Each one load-bearing.";
+const defaultText = "Modern life rewards accumulation -- more tools, more habits, more inputs, more complexity. Most of it is unnecessary. Some of it is actively harmful. Very few things compound.\n\nThis is where I write about finding the smallest set that matters, across three domains: building companies, growing wealth, and sustaining health.";
 
-// Split text into paragraphs (by double newlines or single newlines)
 const paragraphs = (text || defaultText).split(/\n\n|\n/).filter(p => p.trim());
+const displayPrinciples = principles && principles.length > 0 ? principles : [];
 ---
 
-<section class="mb-12 pb-10 border-b-[2.5px]" style="border-color: var(--color-border-light);">
-  {paragraphs.map((paragraph) => (
-    <p class="text-lg leading-relaxed mb-4 last:mb-0" style="color: var(--color-ink-light);">
+<section class="mb-10 pb-8 border-b-[2.5px]" style="border-color: var(--color-border-light);">
+  {/* Zone 1 — Headline */}
+  <h1
+    class="text-3xl md:text-4xl mb-5 leading-tight"
+    style="font-family: var(--font-heading); color: var(--color-ink);"
+  >
+    {headline || defaultHeadline}
+  </h1>
+
+  {/* Zone 2 — Philosophy */}
+  {paragraphs.map((paragraph, index) => (
+    <p
+      class:list={[
+        'text-base leading-relaxed',
+        index < paragraphs.length - 1 ? 'mb-3' : 'mb-0',
+      ]}
+      style={index === 0 ? 'color: var(--color-ink-light);' : 'color: var(--color-ink-muted);'}
+    >
       {paragraph.trim()}
     </p>
   ))}
+
+  {/* Zone 3 — Principles row */}
+  {displayPrinciples.length > 0 && (
+    <div
+      class="mt-6 pt-4 border-t flex flex-wrap gap-x-6 gap-y-2"
+      style="border-color: var(--color-border-light);"
+    >
+      {displayPrinciples.map((principle) => (
+        <span
+          class="text-xs uppercase tracking-widest"
+          style="font-family: var(--font-label); color: var(--color-ink-muted);"
+        >
+          {principle}
+        </span>
+      ))}
+    </div>
+  )}
 </section>

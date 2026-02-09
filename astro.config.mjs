@@ -18,5 +18,8 @@ export default defineConfig({
   integrations,
   vite: {
     plugins: [tailwindcss()],
+    optimizeDeps: {
+      force: true,
+    },
   },
 });

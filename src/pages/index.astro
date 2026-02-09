@@ -38,20 +38,24 @@ function toPost(entry: typeof allPosts[number]) {
 ---
 
 <BaseLayout title="Home">
-  <Hero text={homepage?.heroText} />
+  <Hero
+    headline={homepage?.heroHeadline}
+    text={homepage?.heroText}
+    principles={homepage?.heroPrinciples}
+  />
 
   <!-- Recent posts -->
-  <section class="mb-14">
+  <section class="mb-12">
     <h2
-      class="text-xl mb-4 pb-2 border-b-[2.5px]"
+      class="text-xl mb-5 pb-2 border-b-[2.5px]"
       style="font-family: var(--font-heading); border-color: var(--color-border);"
     >
       Recent
     </h2>
     {years.map((year) => (
-      <div class="mb-6">
+      <div class="mb-5">
         <h3
-          class="text-sm font-[family-name:var(--font-label)] font-600 uppercase tracking-wider mb-2"
+          class="text-xs font-[family-name:var(--font-mono)] mb-2"
           style="color: var(--color-ink-muted);"
         >
           {year}

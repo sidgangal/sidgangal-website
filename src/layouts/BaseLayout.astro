@@ -6,10 +6,125 @@ import '../styles/global.css';
 interface Props {
   title: string;
   description?: string;
+  ogType?: 'website' | 'article';
+  publishedAt?: string;
+  updatedAt?: string;
+  pillar?: string;
+  ogImage?: string;
+  keywords?: string[];
+  wordCount?: number;
+  readingTime?: string;
+  readingMinutes?: number;
+  slug?: string;
+  additionalSchemas?: object[];
 }
 
-const { title, description = 'Build, Invest, Thrive.' } = Astro.props;
+const {
+  title,
+  description = 'Build, Invest, Thrive.',
+  ogType = 'website',
+  publishedAt,
+  updatedAt,
+  pillar,
+  ogImage,
+  keywords,
+  wordCount,
+  readingTime,
+  readingMinutes,
+  slug,
+  additionalSchemas = [],
+} = Astro.props;
+
 const fullTitle = title === 'Home' ? 'Sid Gangal' : `${title} — Sid Gangal`;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const siteURL = Astro.site?.href || 'https://theusefulstack.com';
+
+// OG Image priority: coverImage > /og/{pillar}/{slug}.png > /og-default.png
+function resolveOgImage(): string {
+  if (ogImage) return new URL(ogImage, Astro.site).href;
+  if (pillar && slug) return `${siteURL}og/${pillar}/${slug}.png`;
+  return `${siteURL}og-default.png`;
+}
+const ogImageURL = resolveOgImage();
+
+// Build JSON-LD structured data
+const personSchema = {
+  '@type': 'Person',
+  '@id': `${siteURL}#author`,
+  name: 'Sid Gangal',
+  url: siteURL,
+  jobTitle: 'Writer & Technologist',
+  description: 'Building, investing, and sharing what works.',
+  sameAs: [
+    'https://twitter.com/theusefulstack',
+    'https://linkedin.com/in/sidgangal',
+  ],
+};
+
+const websiteSchema = {
+  '@type': 'WebSite',
+  '@id': `${siteURL}#website`,
+  url: siteURL,
+  name: 'The Useful Stack',
+  description: 'Build, Invest, Thrive.',
+  publisher: { '@id': `${siteURL}#author` },
+};
+
+// Build breadcrumb from URL path
+const pathSegments = Astro.url.pathname.split('/').filter(Boolean);
+const breadcrumbItems = [
+  { '@type': 'ListItem', position: 1, name: 'Home', item: siteURL },
+  ...pathSegments.map((segment, i) => ({
+    '@type': 'ListItem',
+    position: i + 2,
+    name: segment.charAt(0).toUpperCase() + segment.slice(1).replace(/-/g, ' '),
+    item: `${siteURL}${pathSegments.slice(0, i + 1).join('/')}/`,
+  })),
+];
+
+const breadcrumbSchema = pathSegments.length > 0 ? {
+  '@type': 'BreadcrumbList',
+  itemListElement: breadcrumbItems,
+} : null;
+
+const articleSchema = ogType === 'article' && publishedAt ? {
+  '@type': 'Article',
+  '@id': canonicalURL.href,
+  headline: title,
+  description,
+  datePublished: publishedAt,
+  ...(updatedAt && { dateModified: updatedAt }),
+  author: { '@id': `${siteURL}#author` },
+  publisher: { '@id': `${siteURL}#author` },
+  mainEntityOfPage: canonicalURL.href,
+  ...(pillar && { articleSection: pillar }),
+  ...(keywords?.length && { keywords }),
+  ...(wordCount && { wordCount }),
+  ...(readingTime && { timeRequired: readingTime }),
+  inLanguage: 'en-US',
+  image: {
+    '@type': 'ImageObject',
+    url: ogImageURL,
+    width: 1200,
+    height: 630,
+  },
+} : null;
+
+const isArticle = ogType === 'article';
+const formattedDate = publishedAt
+  ? new Date(publishedAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
+  : null;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    personSchema,
+    websiteSchema,
+    breadcrumbSchema,
+    articleSchema,
+    ...additionalSchemas,
+  ].filter(Boolean),
+};
 ---
 
 <!doctype html>
@@ -18,14 +133,69 @@ const fullTitle = title === 'Home' ? 'Sid Gangal' : `${title} — Sid Gangal`;
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
+    <meta name="author" content="Sid Gangal" />
+    {keywords?.length && <meta name="keywords" content={keywords.join(', ')} />}
+    {isArticle && <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />}
     <title>{fullTitle}</title>
+    <link rel="canonical" href={canonicalURL.href} />
     <link rel="sitemap" href="/sitemap-index.xml" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:url" content={canonicalURL.href} />
+    <meta property="og:site_name" content="The Useful Stack" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:image" content={ogImageURL} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={`${title} — The Useful Stack`} />
+    {publishedAt && <meta property="article:published_time" content={publishedAt} />}
+    {updatedAt && <meta property="article:modified_time" content={updatedAt} />}
+    {pillar && <meta property="article:section" content={pillar} />}
+    {isArticle && <meta property="article:author" content="Sid Gangal" />}
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@theusefulstack" />
+    <meta name="twitter:creator" content="@theusefulstack" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageURL} />
+    <meta name="twitter:image:alt" content={`${title} — The Useful Stack`} />
+    {isArticle && readingMinutes && (
+      <>
+        <meta name="twitter:label1" content="Reading time" />
+        <meta name="twitter:data1" content={`${readingMinutes} min read`} />
+      </>
+    )}
+    {isArticle && formattedDate && (
+      <>
+        <meta name="twitter:label2" content="Published" />
+        <meta name="twitter:data2" content={formattedDate} />
+      </>
+    )}
+
+    <!-- Structured Data -->
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@500;600;700&family=Instrument+Serif:ital@0;1&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&display=swap"
       rel="stylesheet"
+      media="print"
+      onload="this.media='all'"
     />
+    <noscript>
+      <link
+        href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@500;600;700&family=Instrument+Serif:ital@0;1&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&display=swap"
+        rel="stylesheet"
+      />
+    </noscript>
   </head>
   <body class="min-h-screen flex flex-col">
     <Header />
@@ -33,5 +203,41 @@ const fullTitle = title === 'Home' ? 'Sid Gangal' : `${title} — Sid Gangal`;
       <slot />
     </main>
     <Footer />
+
+    <!-- Google Analytics 4 -->
+    {import.meta.env.PUBLIC_GA4_ID && (
+      <script async src={`https://www.googletagmanager.com/gtag/js?id=${import.meta.env.PUBLIC_GA4_ID}`}></script>
+    )}
+    {import.meta.env.PUBLIC_GA4_ID && (
+      <script define:vars={{ ga4Id: import.meta.env.PUBLIC_GA4_ID }}>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', ga4Id, {
+          anonymize_ip: true,
+          cookie_flags: 'SameSite=None;Secure',
+        });
+      </script>
+    )}
+
+    <!-- PostHog Analytics -->
+    {import.meta.env.PUBLIC_POSTHOG_KEY && (
+      <script define:vars={{ posthogKey: import.meta.env.PUBLIC_POSTHOG_KEY, posthogHost: import.meta.env.PUBLIC_POSTHOG_HOST || 'https://us.i.posthog.com' }}>
+        !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init capture register register_once register_for_session unregister unregister_for_session getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty createPersonProfile opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing debug getPageviewId".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+        posthog.init(posthogKey, {
+          api_host: posthogHost,
+          person_profiles: 'identified_only',
+          capture_pageview: true,
+          capture_pageleave: true,
+          autocapture: true,
+          persistence: 'localStorage',
+        });
+      </script>
+    )}
+
+    <!-- Cloudflare Web Analytics -->
+    {import.meta.env.PUBLIC_CF_ANALYTICS_TOKEN && (
+      <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon={`{"token": "${import.meta.env.PUBLIC_CF_ANALYTICS_TOKEN}"}`}></script>
+    )}
   </body>
 </html>

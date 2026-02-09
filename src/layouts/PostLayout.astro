@@ -1,5 +1,7 @@
 ---
 import BaseLayout from './BaseLayout.astro';
+import { getReadingTime } from '../utils/reading-time';
+import { detectFAQs, detectHowTo, generateFAQSchema, generateHowToSchema } from '../utils/schema-detection';
 
 interface Props {
   title: string;
@@ -7,9 +9,38 @@ interface Props {
   pillar: 'build' | 'invest' | 'thrive';
   publishedAt: string;
   topics?: string[];
+  content?: string;
+  keywords?: string[];
+  updatedAt?: string;
+  coverImage?: string;
+  slug?: string;
 }
 
-const { title, description, pillar, publishedAt, topics = [] } = Astro.props;
+const {
+  title,
+  description,
+  pillar,
+  publishedAt,
+  topics = [],
+  content,
+  keywords,
+  updatedAt,
+  coverImage,
+  slug,
+} = Astro.props;
+
+// Compute reading time from raw content
+const reading = content ? getReadingTime(content) : null;
+
+// Detect structured content schemas
+const additionalSchemas: object[] = [];
+if (content) {
+  const faqs = detectFAQs(content);
+  if (faqs) additionalSchemas.push(generateFAQSchema(faqs));
+
+  const steps = detectHowTo(content);
+  if (steps) additionalSchemas.push(generateHowToSchema(steps, title));
+}
 
 const dateFormatted = new Date(publishedAt).toLocaleDateString('en-US', {
   year: 'numeric',
@@ -18,7 +49,21 @@ const dateFormatted = new Date(publishedAt).toLocaleDateString('en-US', {
 });
 ---
 
-<BaseLayout title={title} description={description}>
+<BaseLayout
+  title={title}
+  description={description}
+  ogType="article"
+  publishedAt={publishedAt}
+  updatedAt={updatedAt}
+  pillar={pillar}
+  ogImage={coverImage}
+  keywords={keywords}
+  wordCount={reading?.wordCount}
+  readingTime={reading?.duration}
+  readingMinutes={reading?.minutes}
+  slug={slug}
+  additionalSchemas={additionalSchemas}
+>
   <article>
     <header class="mb-10">
       <div class="flex items-center gap-3 mb-4">
@@ -31,6 +76,14 @@ const dateFormatted = new Date(publishedAt).toLocaleDateString('en-US', {
         >
           {dateFormatted}
         </span>
+        {reading && (
+          <span
+            class="text-sm font-[family-name:var(--font-label)]"
+            style="color: var(--color-ink-muted);"
+          >
+            &middot; {reading.minutes} min read
+          </span>
+        )}
       </div>
       <h1 class="text-4xl md:text-5xl mb-3" style="font-family: var(--font-heading);">
         {title}
