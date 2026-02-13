@@ -2,6 +2,13 @@
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import '../styles/global.css';
+import {
+  resolveOgImage,
+  generateBreadcrumbSchema,
+  generateArticleSchema,
+  formatKeywords,
+  generateSchemaGraph,
+} from '../utils/seo-helpers';
 
 interface Props {
   title: string;
@@ -40,91 +47,38 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const siteURL = Astro.site?.href || 'https://theusefulstack.com';
 
 // OG Image priority: coverImage > /og/{pillar}/{slug}.png > /og-default.png
-function resolveOgImage(): string {
-  if (ogImage) return new URL(ogImage, Astro.site).href;
-  if (pillar && slug) return `${siteURL}og/${pillar}/${slug}.png`;
-  return `${siteURL}og-default.png`;
-}
-const ogImageURL = resolveOgImage();
+const ogImageURL = resolveOgImage(
+  siteURL,
+  ogImage ? new URL(ogImage, Astro.site).href : undefined,
+  pillar,
+  slug
+);
 
 // Build JSON-LD structured data
-const personSchema = {
-  '@type': 'Person',
-  '@id': `${siteURL}#author`,
-  name: 'Sid Gangal',
-  url: siteURL,
-  jobTitle: 'Writer & Technologist',
-  description: 'Building, investing, and sharing what works.',
-  sameAs: [
-    'https://twitter.com/theusefulstack',
-    'https://linkedin.com/in/sidgangal',
-  ],
-};
+const breadcrumbSchema = generateBreadcrumbSchema(Astro.url.pathname, siteURL);
 
-const websiteSchema = {
-  '@type': 'WebSite',
-  '@id': `${siteURL}#website`,
-  url: siteURL,
-  name: 'The Useful Stack',
-  description: 'Build, Invest, Thrive.',
-  publisher: { '@id': `${siteURL}#author` },
-};
-
-// Build breadcrumb from URL path
-const pathSegments = Astro.url.pathname.split('/').filter(Boolean);
-const breadcrumbItems = [
-  { '@type': 'ListItem', position: 1, name: 'Home', item: siteURL },
-  ...pathSegments.map((segment, i) => ({
-    '@type': 'ListItem',
-    position: i + 2,
-    name: segment.charAt(0).toUpperCase() + segment.slice(1).replace(/-/g, ' '),
-    item: `${siteURL}${pathSegments.slice(0, i + 1).join('/')}/`,
-  })),
-];
-
-const breadcrumbSchema = pathSegments.length > 0 ? {
-  '@type': 'BreadcrumbList',
-  itemListElement: breadcrumbItems,
-} : null;
-
-const articleSchema = ogType === 'article' && publishedAt ? {
-  '@type': 'Article',
-  '@id': canonicalURL.href,
-  headline: title,
-  description,
-  datePublished: publishedAt,
-  ...(updatedAt && { dateModified: updatedAt }),
-  author: { '@id': `${siteURL}#author` },
-  publisher: { '@id': `${siteURL}#author` },
-  mainEntityOfPage: canonicalURL.href,
-  ...(pillar && { articleSection: pillar }),
-  ...(keywords?.length && { keywords }),
-  ...(wordCount && { wordCount }),
-  ...(readingTime && { timeRequired: readingTime }),
-  inLanguage: 'en-US',
-  image: {
-    '@type': 'ImageObject',
-    url: ogImageURL,
-    width: 1200,
-    height: 630,
-  },
-} : null;
+const articleSchema = ogType === 'article' && publishedAt
+  ? generateArticleSchema({
+      title,
+      description,
+      canonicalURL: canonicalURL.href,
+      publishedAt,
+      updatedAt,
+      siteURL,
+      pillar,
+      keywords,
+      wordCount,
+      readingTime,
+      ogImageURL,
+    })
+  : null;
 
 const isArticle = ogType === 'article';
 const formattedDate = publishedAt
   ? new Date(publishedAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
   : null;
 
-const jsonLd = {
-  '@context': 'https://schema.org',
-  '@graph': [
-    personSchema,
-    websiteSchema,
-    breadcrumbSchema,
-    articleSchema,
-    ...additionalSchemas,
-  ].filter(Boolean),
-};
+const jsonLd = generateSchemaGraph(siteURL, breadcrumbSchema, articleSchema, additionalSchemas);
 ---
 
 <!doctype html>
@@ -134,7 +88,7 @@ const jsonLd = {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
     <meta name="author" content="Sid Gangal" />
-    {keywords?.length && <meta name="keywords" content={keywords.join(', ')} />}
+    {formatKeywords(keywords) && <meta name="keywords" content={formatKeywords(keywords)!} />}
     {isArticle && <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />}
     <title>{fullTitle}</title>
     <link rel="canonical" href={canonicalURL.href} />

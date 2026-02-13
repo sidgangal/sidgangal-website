@@ -6,26 +6,23 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/Hero.astro';
 import PostCard from '../components/PostCard.astro';
 import PillarSection from '../components/PillarSection.astro';
+import { sortByDate, groupByYear } from '../utils/posts';
 
 const reader = createReader(process.cwd(), keystaticConfig);
 const homepage = await reader.singletons.homepage.read();
 
-const buildPosts = await getCollection('build');
-const investPosts = await getCollection('invest');
-const thrivePosts = await getCollection('thrive');
+const entryDate = (p: any) => p.data.publishedAt;
 
-const allPosts = [...buildPosts, ...investPosts, ...thrivePosts]
-  .sort((a, b) => new Date(b.data.publishedAt).getTime() - new Date(a.data.publishedAt).getTime());
+const buildPosts = sortByDate(await getCollection('build'), entryDate);
+const investPosts = sortByDate(await getCollection('invest'), entryDate);
+const thrivePosts = sortByDate(await getCollection('thrive'), entryDate);
 
-// Group recent posts by year
-const postsByYear = allPosts.reduce<Record<string, typeof allPosts>>((acc, post) => {
-  const year = new Date(post.data.publishedAt).getFullYear().toString();
-  if (!acc[year]) acc[year] = [];
-  acc[year].push(post);
-  return acc;
-}, {});
+const allPosts = sortByDate(
+  [...buildPosts, ...investPosts, ...thrivePosts],
+  entryDate
+);
 
-const years = Object.keys(postsByYear).sort((a, b) => Number(b) - Number(a));
+const recentYearGroups = groupByYear(allPosts, entryDate);
 
 function toPost(entry: typeof allPosts[number]) {
   return {
@@ -52,16 +49,16 @@ function toPost(entry: typeof allPosts[number]) {
     >
       Recent
     </h2>
-    {years.map((year) => (
+    {recentYearGroups.map((group) => (
       <div class="mb-5">
         <h3
           class="text-xs font-[family-name:var(--font-mono)] mb-2"
           style="color: var(--color-ink-muted);"
         >
-          {year}
+          {group.year}
         </h3>
         <ul class="list-none m-0 p-0">
-          {postsByYear[year].map((post) => (
+          {group.posts.map((post) => (
             <PostCard
               title={post.data.title}
               href={`/${post.data.pillar}/${post.data.slug}`}

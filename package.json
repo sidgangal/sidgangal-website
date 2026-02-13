@@ -6,22 +6,31 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
+    "test": "vitest",
+    "test:ui": "vitest --ui",
+    "test:coverage": "vitest --coverage",
     "social:generate": "node scripts/generate-social.js",
     "social:recent": "node scripts/generate-social.js --recent",
     "social:all": "node scripts/generate-social.js --all",
     "images:generate": "node scripts/generate-og-images.js"
   },
   "dependencies": {
-    "astro": "^5.7.10",
     "@astrojs/mdx": "^4.3.0",
-    "@astrojs/sitemap": "^3.3.1",
     "@astrojs/react": "^4.2.1",
-    "@keystatic/core": "^0.5.46",
+    "@astrojs/sitemap": "^3.3.1",
     "@keystatic/astro": "^5.0.3",
+    "@keystatic/core": "^0.5.46",
+    "@tailwindcss/typography": "^0.5.16",
+    "@tailwindcss/vite": "^4.1.14",
+    "astro": "^5.7.10",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "tailwindcss": "^4.1.14",
-    "@tailwindcss/vite": "^4.1.14",
-    "@tailwindcss/typography": "^0.5.16"
+    "tailwindcss": "^4.1.14"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.58.2",
+    "@vitest/coverage-v8": "^4.0.18",
+    "@vitest/ui": "^4.0.18",
+    "vitest": "^4.0.18"
   }
 }
