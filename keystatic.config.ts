@@ -1,10 +1,100 @@
 import { config, fields, collection, singleton } from '@keystatic/core';
+import { block, wrapper } from '@keystatic/core/content-components';
 
 const pillarOptions = [
   { label: 'Build', value: 'build' },
   { label: 'Invest', value: 'invest' },
   { label: 'Thrive', value: 'thrive' },
 ] as const;
+
+const colorOption = fields.select({
+  label: 'Color',
+  options: [
+    { label: 'Build (terracotta)', value: 'build' },
+    { label: 'Invest (olive)', value: 'invest' },
+    { label: 'Thrive (goldenrod)', value: 'thrive' },
+  ],
+  defaultValue: 'build',
+});
+
+const financeComponents = {
+  SectionDivider: block({
+    label: 'Section Divider',
+    schema: {
+      number: fields.text({ label: 'Number' }),
+      label: fields.text({ label: 'Label' }),
+    },
+  }),
+  Callout: wrapper({
+    label: 'Callout',
+    schema: {
+      color: colorOption,
+    },
+  }),
+  JargonBox: wrapper({
+    label: 'Jargon Box',
+    schema: {
+      term: fields.text({ label: 'Term' }),
+      color: colorOption,
+    },
+  }),
+  StockProfile: wrapper({
+    label: 'Stock Profile',
+    schema: {
+      name: fields.text({ label: 'Name' }),
+      type: fields.text({ label: 'Type' }),
+      price: fields.text({ label: 'Price' }),
+      pe: fields.text({ label: 'P/E Ratio' }),
+      divYield: fields.text({ label: 'Dividend Yield' }),
+      revGrowth: fields.text({ label: 'Revenue Growth' }),
+      method: fields.text({ label: 'Valuation Method' }),
+      tagline: fields.text({ label: 'Tagline' }),
+      analogy: fields.text({ label: 'Analogy', multiline: true }),
+      insight: fields.text({ label: 'Insight', multiline: true }),
+      color: colorOption,
+    },
+  }),
+  TransmissionChain: block({
+    label: 'Transmission Chain',
+    schema: {},
+  }),
+  DCFVisualizer: block({
+    label: 'DCF Visualizer',
+    schema: {},
+  }),
+  RateSensitivity: block({
+    label: 'Rate Sensitivity',
+    schema: {},
+  }),
+  SilentCrashCalc: block({
+    label: 'Silent Crash Calculator',
+    schema: {},
+  }),
+  ITCDividendChart: block({
+    label: 'ITC Dividend Chart',
+    schema: {},
+  }),
+  RevenueGrowthChart: block({
+    label: 'Revenue Growth Chart',
+    schema: {},
+  }),
+  GrowthJourneyChart: block({
+    label: 'Growth Journey Chart',
+    schema: {},
+  }),
+  RateDifferentialChart: block({
+    label: 'Rate Differential Chart',
+    schema: {},
+  }),
+  USM1Chart: block({
+    label: 'US M1 Chart',
+    schema: {},
+  }),
+  IndiaM1Chart: block({
+    label: 'India M1 Chart',
+    schema: {},
+  }),
+};
 
 function postCollection(pillar: string) {
   return collection({
@@ -44,7 +134,10 @@ function postCollection(pillar: string) {
         label: 'Cover Image Path',
         description: 'Optional custom OG image path (e.g. /images/my-post.png)',
       }),
-      content: fields.mdx({ label: 'Content' }),
+      content: fields.mdx({
+        label: 'Content',
+        components: financeComponents,
+      }),
     },
   });
 }

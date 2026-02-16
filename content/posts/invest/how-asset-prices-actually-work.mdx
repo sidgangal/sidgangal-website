@@ -1,0 +1,326 @@
+---
+title: How Asset Prices Actually Work
+slug: how-asset-prices-actually-work
+description: >-
+  Fair value, interest rates, money supply, and the real estate myth --
+  explained with real Indian stocks, interactive charts, and zero jargon.
+pillar: invest
+format: Deep Dive
+topics:
+  - investing-philosophy
+  - stocks
+  - macroeconomics
+  - real-estate
+publishedAt: 2025-02-15
+---
+
+<SectionDivider number="00" label="Before We Begin" />
+
+## The Building Blocks
+
+A few concepts pop up throughout this article. Let's get them out of the way so nothing trips you up later.
+
+**Inflation**: When the price of goods and services rises over time. If inflation is 6%, something that costs 100 today will cost 106 next year. Your money buys less each year -- which is why 1 lakh in 2010 felt like much more than 1 lakh today.
+
+**Bond**: A loan you give to a government or company. In return, they pay you regular interest (called a 'coupon') and return your principal on a set date. Government bonds are treated as 'risk-free' because governments can raise taxes or print money to repay you -- unlike companies, which can go bankrupt.
+
+**P/E Ratio (Price-to-Earnings)**: The quickest way to judge if a stock is 'expensive' or 'cheap.' It tells you: for every 1 of profit the company earns, how much are you paying? A P/E of 7x (Coal India) means you pay 7 per 1 of profit. A P/E of 350x (Zomato) means you pay 350 per 1 of profit -- extremely expensive, unless profits are about to explode.
+
+**FIIs (Foreign Institutional Investors)**: Large foreign funds -- US pension funds, sovereign wealth funds, global mutual funds -- that invest in Indian markets. Their actions move markets because of the sheer volume of capital involved.
+
+<SectionDivider number="01" label="The Foundation" />
+
+## What Is "Fair Value"?
+
+At its core, every asset is worth the sum of all the cash it will generate in the future -- adjusted for the fact that money today is worth more than money tomorrow. This is called the Discounted Cash Flow (DCF) model.
+
+Someone offers you a deal: they'll pay you **1,00,000** exactly one year from now. How much would you pay for that deal today?
+
+If you can earn 10% in a fixed deposit, you'd pay at most **90,909** -- because that amount growing at 10% for a year gives you 1,00,000.
+
+That 90,909 is the **present value** of a future 1,00,000. The 10% you used to "shrink" the future amount back to today is called the **discount rate**.
+
+<JargonBox term="Discount Rate">
+The annual rate used to convert future money into today's money. It's called "discount" because future cash is always worth less than the same cash today -- so you're discounting it. It's heavily influenced by the interest rates set by central banks.
+</JargonBox>
+
+Stretch this idea across many years and many cash flows, and you get the fair value of any asset:
+
+> Fair Value = CF1/(1+r)1 + CF2/(1+r)2 + CF3/(1+r)3 + ...
+>
+> CF = cash flow in each year / r = discount rate / n = years into the future
+
+<DCFVisualizer />
+
+### The Shortcut: Cash Flows That Go On Forever
+
+Some businesses have been paying dividends for decades and will likely continue indefinitely. For these, there's a simpler formula called the **perpetuity**:
+
+> Fair Value = Annual Cash Flow / Discount Rate
+
+A stock paying 10/year forever at a 10% discount rate is worth 10 / 0.10 = **100**. Now watch what happens when only the discount rate changes:
+
+| Discount Rate | Fair Value | vs 10% Base |
+|---|---|---|
+| 5% | 200 | +100% |
+| 8% | 125 | +25% |
+| 10% | 100 | 0% |
+| 12% | 83 | -17% |
+| 15% | 67 | -33% |
+
+The same 10 of annual cash flow is worth 200 at 5% and only 67 at 15%. Nothing about the business changed -- only the discount rate.
+
+<Callout>
+This is why interest rates are the most powerful force in finance. Central banks don't change your company's profits. They change the discount rate -- and that reprices EVERY asset in the economy simultaneously.
+</Callout>
+
+<SectionDivider number="02" label="Real Examples" />
+
+## Not All Stocks Are Valued the Same Way
+
+Not every stock pays dividends. Not every stock is 'cheap.' Let's look at three real Indian stocks that represent three fundamentally different valuation approaches.
+
+<StockProfile
+  name="ITC"
+  type="Dividend Stock"
+  price="430"
+  pe="27x"
+  divYield="3.5%"
+  revGrowth="~8%"
+  method="Dividend Discount Model (DDM)"
+  tagline="The Steady Compounder"
+  color="invest"
+  analogy="The established dhaba -- packed every day, owner takes cash home every month. You value it by how much profit it hands you."
+  insight="For dividend stocks, the valuation math is transparent. You're buying a cash-generating machine. The only debate is the growth rate of that cash."
+ >
+ITC pays 15/share in dividends annually. If we expect dividends to grow at 6% per year and we want a 12% return, the Gordon Growth Model gives us: 15 / (0.12 - 0.06) = 250.
+
+The market prices ITC at 430 -- well above 250. This means investors either expect higher dividend growth than 6% or are willing to accept a lower return than 12%.
+</StockProfile>
+
+<JargonBox term="Why subtract growth from the discount rate?">
+If a company's cash flows grow every year, they're worth more than flat cash flows. The formula accounts for this by reducing the 'effective' discount. The smaller the gap between your required return and the growth rate, the higher the value -- which is why fast-growing companies command higher prices.
+</JargonBox>
+
+<StockProfile
+  name="Coal India"
+  type="Deep Value Stock"
+  price="370"
+  pe="7x"
+  divYield="6.8%"
+  revGrowth="~3%"
+  method="Earnings Yield / Asset Value"
+  tagline="The Cash Cow"
+  color="thrive"
+  analogy="The old gold jewellery shop -- still profitable, but the neighbourhood is changing. Cheap to buy, but is it cheap for a reason?"
+  insight="Value stocks are cheap because the market expects their cash flows to shrink. The bet is: will they shrink as fast as the market thinks? If decline is slower than expected, you profit."
+ >
+Coal India trades at just 7x earnings -- meaning if you bought the entire company, it would pay for itself from profits in just 7 years. It pays 25/share in dividends, a hefty 6.8% yield. But the market prices it cheaply because it believes coal demand will structurally decline as India shifts toward renewables.
+</StockProfile>
+
+<StockProfile
+  name="Zomato"
+  type="Growth Stock"
+  price="230"
+  pe="350x+"
+  divYield="0%"
+  revGrowth="~55%"
+  method="DCF on Projected Future Earnings"
+  tagline="The Future Bet"
+  color="build"
+  analogy="The new cloud kitchen chain -- burning cash, opening 50 locations, no profit yet. But if it works, it'll be 10x bigger in 5 years."
+  insight="Growth stocks are the most sensitive to interest rates. Since all their value lies in the distant future, a higher discount rate crushes them disproportionately."
+ >
+Zomato pays zero dividends and barely turns a profit today. Yet it's valued at over 2 lakh crore. Why? Investors project its revenue (growing at 50%+ year-over-year) will eventually translate into massive profits. The entire valuation rests on cash flows expected 5-10 years from now.
+</StockProfile>
+
+<JargonBox term="Market Capitalisation">
+How does a 230 stock become a 2 lakh crore company? Because Zomato has roughly 880 crore shares outstanding. Stock price x total shares = market capitalisation (the total value the market places on the company). So 230 x 880 crore shares = approx. 2 lakh crore.
+</JargonBox>
+
+<ITCDividendChart />
+<RevenueGrowthChart />
+<GrowthJourneyChart />
+<RateSensitivity />
+
+<SectionDivider number="03" label="The Gravity of Finance" />
+
+## Interest Rates: US vs India
+
+Warren Buffett said interest rates act like gravity on asset prices. Low rates make everything float. High rates pull everything down.
+
+In the DCF formula, the discount rate is built from a foundation:
+
+> Discount Rate = Risk-Free Rate + Risk Premium
+
+The **risk-free rate** is the return on the safest investment -- government bonds. We call it "risk-free" not because governments can't default, but because large, stable economies are overwhelmingly likely to repay.
+
+<JargonBox term="Risk Premium">
+The extra return investors demand for taking on uncertainty. A government bond is safe, so its return is the baseline. A stock could go to zero, so investors demand a higher return to compensate. The riskier the investment, the higher the premium stacked on top.
+</JargonBox>
+
+When central banks raise their benchmark rate, the risk-free rate rises. That flows into every discount rate, every valuation model. Every asset gets repriced -- simultaneously.
+
+### Why US Rates Affect India
+
+India has its own central bank -- the RBI -- with its own interest rate called the **repo rate**.
+
+<JargonBox term="Repo Rate">
+The rate at which the RBI lends money to commercial banks overnight. When the RBI raises it, borrowing costs rise across the economy -- your home loan EMI, car loan, and business loan all get costlier. It's the master switch for interest rates in India.
+</JargonBox>
+
+But the RBI doesn't set rates in a vacuum. When US rates rose from 0.25% to 5.5% in 2022-2023, US Treasury bonds suddenly offered attractive, risk-free returns *in dollars*. FIIs faced a simple choice: why risk Indian stocks when you can earn 5.5% risk-free in the world's reserve currency?
+
+This triggers capital outflows. FIIs sell Indian stocks, convert rupees to dollars, and buy US Treasuries. India gets a double hit: prices fall from selling pressure, and the rupee weakens.
+
+A weaker rupee is a serious problem because India imports enormous quantities of crude oil, electronics, and machinery -- all priced in dollars. When the rupee weakens, these imports cost more in rupee terms, pushing up domestic prices. That's **imported inflation**. The RBI then often has to raise rates not because the domestic economy demands it, but to defend the rupee and keep the rate differential attractive enough to stem outflows.
+
+<RateDifferentialChart />
+
+<TransmissionChain />
+
+<Callout color="invest">
+The entire chain reverses when rates fall -- which is why rate-cut cycles produce massive bull runs globally. The 2020-2021 rally was textbook: rates near zero, discount rates collapse, everything floats up.
+</Callout>
+
+<SectionDivider number="04" label="The Other Force" />
+
+## Money Supply: The Hidden Engine
+
+Interest rates are the price of money. But there's another variable that matters enormously: the quantity of money itself.
+
+### What Is M1 Money Supply?
+
+**M1** is the most liquid part of the money supply -- money available to be spent or invested *right now*. It includes physical currency, demand deposits, and other liquid deposits.
+
+Think of it this way:
+- **Interest Rate** -- The price of borrowing money
+- **M1 Money Supply** -- The volume of money available to spend or invest
+
+When central banks increase M1, there's more money chasing the same assets. Prices rise not because assets became more valuable, but because **currency became less scarce**.
+
+### How Does M1 Actually Expand?
+
+You'll often hear "the money printer goes brr." Here's what actually happens:
+
+**1. Central bank buys bonds from banks** -- The RBI or Fed purchases government bonds that banks hold. The central bank creates new money electronically to pay for them -- this is money that didn't exist before.
+
+**2. Banks now have more cash reserves** -- Banks received fresh money in exchange for those bonds. Their reserves swell.
+
+**3. Banks lend more, deposits multiply** -- With more reserves, banks issue more loans. When a bank gives you a 50L home loan, it creates a deposit in your account. That new deposit is new M1. This is how most money is actually created.
+
+**4. More money chases same assets** -- With more money in the system, people and institutions buy more stocks, property, and bonds -- pushing prices up.
+
+<JargonBox term="Quantitative Easing (QE)">
+The formal name for step 1 -- when a central bank buys large quantities of bonds to inject money into the system. The US Fed did this aggressively during 2020-2021, buying trillions in bonds. That's why US M1 exploded from $4 trillion to nearly $20 trillion in just two years.
+</JargonBox>
+
+<USM1Chart />
+<IndiaM1Chart />
+
+### The Two Forces Framework
+
+Asset prices are driven by two forces simultaneously:
+
+1. **Interest rates set the discount rate** -- Higher rates = lower fair values
+2. **Money supply sets the liquidity** -- More money = more demand for assets
+
+Sometimes they align: low rates + high liquidity = massive bull market (2020-21). Sometimes they conflict: high rates but abundant liquidity (2023-24), which is why markets didn't crash as badly as rate models predicted.
+
+<Callout>
+You cannot predict asset prices by looking at interest rates alone. You must watch the money supply too. This is the single most important takeaway of this entire article.
+</Callout>
+
+<SectionDivider number="05" label="The Great Debate" />
+
+## Stocks vs Real Estate: Who's Right?
+
+'Stocks can crash but real estate always retains value.' One of the most common beliefs in Indian households. Let's stress-test it.
+
+### Why Real Estate Appears Resilient
+
+**Illiquidity acts as a shock absorber** -- You can sell a stock in 3 seconds. Selling a house takes months. In 2020, stock indices fell 40% in weeks. Real estate transactions froze -- prices didn't visibly fall because there were no transactions to set lower prices.
+
+**Leverage creates a floor** -- Most real estate is bought with home loans. Banks won't let prices fall below loan values -- it threatens their own balance sheets. The banking system has a structural incentive to prevent price discovery during downturns.
+
+**Emotional anchoring** -- Homeowners refuse to sell at a loss and simply wait. Unlike stocks -- where a blinking red number forces you to confront losses every second -- homeowners are anchored to their purchase price. This reduces supply and supports prices on paper.
+
+### Real Estate Crashes Are Real
+
+**Japan, 1991-2010** -- Prices fell 60%+ and took two decades to bottom. An entire generation experienced negative equity -- their homes were worth less than their outstanding loans.
+
+**USA, 2007-2012** -- National prices fell ~27%. Las Vegas and Phoenix dropped 50%+. Millions lost homes to foreclosure.
+
+**India -- Noida / Greater Noida** -- Many projects from the 2012-2014 boom still trade at or below launch prices -- a decade later. In real (inflation-adjusted) terms, those buyers have lost 40-50% of purchasing power.
+
+<SilentCrashCalc />
+
+### What About Rental Income?
+
+A fair comparison must include **rental income** -- real estate's version of dividends. A 1 crore flat in Bangalore rented at 25,000/month earns 3L/year -- a **3% rental yield**. How does that compare?
+
+| Asset | Yield | Type | Note |
+|---|---|---|---|
+| Real Estate | 2-3% | Rental Yield | Most Indian cities |
+| ITC | 3.5% | Dividend Yield | Plus capital gains |
+| Coal India | 6.8% | Dividend Yield | Plus capital gains |
+| Govt Bond | 7.0% | Coupon Yield | Risk-free |
+
+In most Indian metros, rental yields are 2-3% -- lower than a government bond (7%) or even ITC's dividend (3.5%). Real estate bulls argue the real return comes from price appreciation. But if prices stay flat for a decade, inflation destroys 40%+ of real value even while you collect rent.
+
+### The Real Question Isn't "Stocks vs Real Estate"
+
+Both are denominated in currency. If money supply expands, **both** rise. If it contracts, both are vulnerable. The real question: **what is happening to the money supply?**
+
+During 2020-21, aggressive money printing pushed both stocks and real estate up together. During tightening, both come under pressure -- stocks fall faster (liquid, repriced every second) and real estate slower (illiquid), but both eventually adjust to the same economic forces.
+
+### The Complete Comparison
+
+| Factor | Stocks | Real Estate |
+|---|---|---|
+| Liquidity | Seconds | Months to years |
+| Price Discovery | Continuous, transparent | Infrequent, opaque |
+| Crash Visibility | Immediate | Delayed, hidden |
+| Income Stream | Dividends (if any) | Rental income |
+| Leverage Effect | Margin calls force selling | Banks avoid forced sales |
+| Inflation Erosion | Visible in real returns | Hidden behind nominal prices |
+| M1 Sensitivity | High (fast repricing) | High (slow repricing) |
+| Recovery Speed | Months to years | Years to decades |
+
+<Callout color="thrive">
+Real estate doesn't 'retain value' better than stocks. It reveals losses more slowly. The underlying forces -- interest rates and money supply -- affect both through the same mechanisms. The difference is speed of price discovery, not fundamental resilience.
+</Callout>
+
+<SectionDivider number="06" label="Now What?" />
+
+## What Should You Actually Do With This?
+
+Understanding the machinery is one thing. Using it is another. Here are five concrete ways to apply this framework.
+
+**1. Watch the rate cycle, not the news** -- When the Fed or RBI announces a rate decision, you now know the full chain. A rate cut means discount rates fall, fair values rise, asset prices should increase. Understand why before it happens.
+
+**2. Track M1 alongside rates** -- RBI publishes M1 data on its website. The US Fed publishes it on FRED. If rates are high but M1 is still growing, markets may hold up. If rates fall but M1 is shrinking, the bullish case is weaker than it looks.
+
+**3. Know what kind of stock you own** -- A portfolio full of growth stocks (high P/E, no dividends) is maximally exposed to rate hikes. Dividend/value stocks have a natural cushion. In a rising rate environment, consider tilting toward cash-generating companies.
+
+**4. Don't panic-sell during rate hikes** -- When rates rise and your portfolio drops, the instinct is to sell. But the cash flows haven't changed -- only the discount rate. If rates are expected to come back down (as they always eventually do), fair values will recover.
+
+**5. Apply the same framework to real estate** -- Before buying property, calculate rental yield (annual rent / price). Compare to risk-free returns (bond yields at ~7%). If rental yield is 2% and bonds pay 7%, you need 5%+ annual appreciation just to break even.
+
+<SectionDivider number="*" label="The Mental Model" />
+
+## Bringing It All Together
+
+**1. Every asset's price = future cash flows, discounted** -- DCF is the bedrock. Whether it's ITC's dividends, Coal India's earnings, or Zomato's future profits -- the framework is universal.
+
+**2. Interest rates are the gravity of finance** -- When central banks raise rates, discount rates rise and ALL fair values compress. US rates set the global floor; India's repo rate adds a local premium.
+
+**3. Money supply is the tide** -- Rates are the price of money. M1 is the volume. When central banks print money (QE), both stocks and real estate float. When they stop, both are vulnerable.
+
+**4. Growth stocks are rate-sensitive** -- Their value depends on distant future cash flows, so rate hikes crush them disproportionately. Dividend/value stocks with near-term cash are more resilient.
+
+**5. Real estate isn't 'safer' -- it's slower** -- Stocks are a live scoreboard. Real estate is a quarterly report that arrives late and uses creative accounting. Same forces, different speed.
+
+---
+
+> Understanding these mechanics won't tell you what to buy tomorrow. But it will ensure you're never surprised by *why* prices moved -- and that's a significant edge.

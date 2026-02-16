@@ -2,6 +2,41 @@
 import { getCollection, render } from 'astro:content';
 import PostLayout from '../../layouts/PostLayout.astro';
 
+// Presentational components (server-rendered, no JS sent to client)
+import SectionDivider from '../../components/finance/mdx/SectionDivider';
+import Callout from '../../components/finance/mdx/Callout';
+import JargonBox from '../../components/finance/mdx/JargonBox';
+import StockProfile from '../../components/finance/mdx/StockProfile';
+import TransmissionChain from '../../components/finance/mdx/TransmissionChain';
+
+// Interactive components (client-hydrated via Astro islands)
+import DCFVisualizer from '../../components/finance/islands/DCFVisualizerIsland.astro';
+import RateSensitivity from '../../components/finance/islands/RateSensitivityIsland.astro';
+import SilentCrashCalc from '../../components/finance/islands/SilentCrashCalcIsland.astro';
+import ITCDividendChart from '../../components/finance/islands/ITCDividendChartIsland.astro';
+import RevenueGrowthChart from '../../components/finance/islands/RevenueGrowthChartIsland.astro';
+import GrowthJourneyChart from '../../components/finance/islands/GrowthJourneyChartIsland.astro';
+import RateDifferentialChart from '../../components/finance/islands/RateDifferentialChartIsland.astro';
+import USM1Chart from '../../components/finance/islands/USM1ChartIsland.astro';
+import IndiaM1Chart from '../../components/finance/islands/IndiaM1ChartIsland.astro';
+
+const financeComponents = {
+  SectionDivider,
+  Callout,
+  JargonBox,
+  StockProfile,
+  TransmissionChain,
+  DCFVisualizer,
+  RateSensitivity,
+  SilentCrashCalc,
+  ITCDividendChart,
+  RevenueGrowthChart,
+  GrowthJourneyChart,
+  RateDifferentialChart,
+  USM1Chart,
+  IndiaM1Chart,
+};
+
 export async function getStaticPaths() {
   const posts = await getCollection('invest');
   return posts.map((post) => ({
@@ -26,5 +61,5 @@ const { Content } = await render(post);
   updatedAt={post.data.updatedAt?.toISOString()}
   coverImage={post.data.coverImage}
 >
-  <Content />
+  <Content components={financeComponents} />
 </PostLayout>
