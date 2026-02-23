@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /roughwork/
 
 Sitemap: https://theusefulstack.com/sitemap-index.xml
