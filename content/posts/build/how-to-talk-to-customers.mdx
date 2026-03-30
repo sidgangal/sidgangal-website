@@ -1,0 +1,170 @@
+---
+title: How I Learned to Talk to Customers
+slug: how-to-talk-to-customers
+description: >-
+  Fifty user interviews got the business model right. But it took five days of
+  shadowing solar engineers to learn how to build the product.
+pillar: build
+format: Guide
+topics:
+  - customer-discovery
+  - startups
+  - founder-journey
+publishedAt: 2026-03-15
+keywords: []
+---
+I started Solar Labs in the final year of college. My co-founder [Ankush](https://www.linkedin.com/in/ankushjindal/) and I could code, but neither of us was a solar engineer. We were building software for an industry we didn't have experience in.
+
+So we did what everyone says to do. We talked to customers. Over the next several months, Ankush and I ran about 50 user interviews - solar installers, EPC companies, design engineers, project managers. Ankush would ask the questions while I took notes, and vice versa. We learned how the industry worked, who the players were, what tools existed, what frustrated people.
+
+Those interviews changed the direction of the company. We'd started with a marketplace model - connecting solar installers with customers. The interviews made it clear that wasn't the right approach. Solar companies didn't need leads. They needed better design tools. Better proposals which conveyed the solar value proposition to homeowners and factories better. Hence, we pivoted to SaaS.
+
+Then we built V1. And we got a lot of things wrong.
+
+Some features missed the mark. But honestly, the bigger waste was technical. We spent months on AI experiments - trying to convert video to 3D models, trying to generate 3D from Google Maps imagery. Interesting research, but the technology needed to make that work wasn't quite there yet. This was fine, I would say that in hindsight this was still worth trying. We also made some bad technical decisions on the system design product. The architecture underneath was shaky, and eventually we had to rebuild the whole thing.
+
+When it came time to rebuild, I knew interviews alone weren't going to cut it. We needed something deeper. We needed to watch solar engineers actually work.
+
+## What Interviews Got Us
+
+There's a great YC lecture by Emmett Shear on running user interviews. The core ideas are simple: talk to users before you build, don't ask them what features they want, try to understand their problems instead, and go into detective mode when something surprises you.
+
+Good advice. And our 50 interviews followed that playbook closely. Ankush had a knack for it -he'd get people talking about their day-to-day in a way that felt like conversation, not interrogation.
+
+Those interviews accomplished a lot. They got our business model right. They helped us understand the competitive landscape - who was using what, what they liked, what they hated. They gave us the confidence to pivot from marketplace to SaaS. That alone probably started the company right. The marketplace model would have been doomed from day 1. &#x20;
+
+But here's what interviews couldn't do: they couldn't tell us how solar engineers actually worked, minute by minute, throughout a typical day.
+
+People can't articulate workflows they've internalised. Ask a solar designer what takes the most time, and they'll say "shading analysis" or "design iterations." They won't say "making hatching look pretty" because they don't even register it as a separate task. It's just part of the work.
+
+The gap between what people say they do and what they actually do - that's where the real product insights live. And the only way to see that gap is to watch.
+
+During the rebuild, we had a partner through YesBank's [YesScale Accelerator](https://villgro.org/programs/yes-scale-accelerator/) - 4PEL (Fourth Partner Energy), a solar developer cum EPC company in India. Wonderful team and I'm very thankful to all their help, probably much much more that I know. I negotiated to spend a week at their office, shadowing their team. Notebook in hand, no laptop. Just watching.
+
+That week changed everything.
+
+## The 4PEL Week
+
+### Setting the Scene
+
+4PEL did rooftop and ground-mount installations, had a team of design engineers, salespeople, and project managers. They were one of our partners for the V2 rebuild, which meant they had skin in the game - they'd be using whatever we built.
+
+I showed up on a Monday morning with a blank notebook. The deal was simple: I'd sit next to their engineers, watch them work, and not interrupt unless they wanted to explain something.&#x20;
+
+By Wednesday, my notebook was full. I started a second one.
+
+### Day 1-2: Watching Manoj and Pawan
+
+The first thing I noticed was that solar design is a two-person job. Manoj and Pawan sat next to each other, one feeding values into SketchUp while the other verified the numbers. Nobody would describe this as "pair programming" in an interview. But that's exactly what it was. The workflow was collaborative in a way that no feature spec had captured, and fragile in a way that no one had mentioned.
+
+Then came the shadow analysis.
+
+They needed to check shadows for the 21st of every month. First they'd try a 9-to-4 sun window. If the panel capacity didn't meet the contractual load, they'd try 9-to-3:30. Each iteration meant adding and removing panels manually, one by one.
+
+Here's the part that shocked me: while they were adding and removing panels, they didn't know their current capacity. They were working blind, going on gut feel. Their bet was usually that they'd removed too many. But once you remove panels and adjust the layout, going back is painful. So they'd push forward and hope it worked out.
+
+No interview would have surfaced this. If you asked them "how do you handle shading?" they'd give you a clean three-step answer. Watching them do it revealed a messy, uncertain, iterative process with no feedback loop.
+
+The export process was its own disaster. They'd design in SketchUp, then export to DWG format for AutoCAD. Then spend an hour — sometimes more — cleaning up stray lines. Toggle layers, delete measurements, remove offsets that were needed for modeling but meaningless for construction drawings. Sometimes they couldn't remove everything and just left it in. Seeing them struggle with copying designs and deleting selective elements — they so clearly wanted a layering tool that didn't exist.
+
+I watched their copy-paste workflow. They always needed a reference point when duplicating elements. The offset tool required a direction and a value, then you'd type "\*X" to repeat X times. These micro-workflows — the kind that take five seconds each but happen hundreds of times a day — are completely invisible in interviews.
+
+And then there was symmetry. You can't leave one panel hanging off the side of an array "just like that." Aesthetic constraints that no product requirement document would ever mention, but that governed real design decisions every day.
+
+### Day 3: Vinayak and the Big Realization
+
+Day 3, I sat with Vinod, who handled cabling. His workflow was entirely manual. Measure the distance from each string to the inverter along the cable trench. Add the up-and-down Z distance. Multiply by 2 for the runs. Add a 10% safety buffer. All in Excel. Every single cable.
+
+But the cabling wasn't the revelation. The time allocation was.
+
+I started actually tracking how Vinod, Manoj, and Pawan spent their time across the day. And what I found was this: most of their time went into decorative work. Hatching. Coloring. Cutting waste lines. Making measurements look clean. They spent remarkably little time on actual designing - figuring out where to place panels, where to start stringing, where to put the inverter.
+
+If you asked them "what takes the most time?" they'd say design or shading analysis. They wouldn't say "making hatching look pretty" because they didn't think of it as separate from the work. It was just what you did. But watching them revealed that the actual time allocation was completely inverted from what they'd tell you.
+
+Then came the stringing disaster.
+
+After Vinayak completed all the stringing on a layout, two modules were missing. Here's what happened: during the design process, they'd added 6 panels somewhere to make the string configuration work, and removed 8 panels somewhere else because of shading. Net result: minus 2 modules. Nobody noticed until the very end.
+
+Think about how fragile that is. If the last inverter happened to have the right panel count, and the middle inverters were off by plus 1 and minus 1, you might never catch the error. Manual tracking creating silent failures, compounding with every decision.
+
+Then Vinod realized he needed to reverse the panel orientation on one shed to minimize DC wire length. Each individual change seemed manageable. But the complexity was compounding with every step, and there was no system keeping track of the cumulative effect.
+
+### Day 4: What People Say vs. What They Do
+
+On the fourth day, I ran some interviews - but now with the context of three days of observation. The contrast was striking.
+
+**Swati** told me: "I hate AutoCAD work." Clean, quotable, the kind of thing you'd write on a sticky note in a product meeting. But after watching her for hours, I knew what actually consumed her time: BOM revisions when cable lengths changed, wiring diagrams that broke when inverter positions shifted. She also mentioned "you can't copy paste scale values in SketchUp" - a specific pain point that only surfaced because I could ask grounded follow-up questions based on what I'd already observed.
+
+**Bharat** was the reviewer, and his perspective was completely different from the designers'. He caught mistakes the creators missed: washing valves not accessible, skip wiring not used where it should have been, footing reference points placed wrong. He didn't find small projects frustrating - but for big projects, he needed to check every single string. Without the reviewer's perspective, you'd only have the creator's view of the workflow. You'd optimize for speed of creation and miss the review bottleneck entirely.
+
+**The Ground Mount Designer** told me "rough estimations work for shading, and the whole building is not required." This directly contradicted our assumption that precise 3D modeling was essential. But then the design manager told me "presentation is super important." Same company, two roles, completely opposite needs from the same software.
+
+Interviews alone would have given me one of these perspectives. Maybe two, if I was lucky. Shadowing gave me all of them - and more importantly, showed me how they conflicted with each other.
+
+### The Sales Meeting
+
+On the last afternoon, I sat in on a sales meeting. This wasn't scheduled as a "user interview." I just asked if I could observe.
+
+The numbers were revealing. Clients received about 20 proposals from different solar companies. The close rate was around 10%. Turnaround was 7 days for the first design, 7 days for the client's response, then 2-3 days for each iteration after that. Clients wanted 3-4 design options simultaneously. Each proposal needed 3D renders, walkthrough videos, and LCOE calculations.
+
+The biggest problem wasn't design quality. It was speed. The design team was a bottleneck not because they were slow at designing, but because each proposal was a manual, multi-day process. Sending proposals faster meant more at-bats with clients who were comparing 20 alternatives.
+
+None of this came from talking to engineers. It came from sitting where sales met design.
+
+One more thing from that meeting. Every company's design team lived in what I'd call a confirmation bias bubble - they believed they were the right ones and everyone else was doing it wrong. 4PEL thought their process was superior. So did every other EPC we'd talked to. This taught me to triangulate. Never trust a single company's view of how things "should" work.
+
+## What Shadowing Taught Me
+
+Six things I learned from that week, each of which shaped a real product decision at Solar Labs.
+
+**People don't know their own workflows.** They've adapted to the pain. They struggle and don't call it struggling. Manoj and Pawan worked blind during panel placement, and they thought that was just how it was done. This led us to build the auto-designer - a tool that automated the panel placement and removal loop and showed capacity in real time.
+
+**The real bottleneck is rarely where people say it is.** Engineers told us shading analysis was the hardest part. Observation showed they spent more time on formatting and layout cleanup. We prioritized automated layouts and one-click exports.
+
+**Interview different roles, but shadow the doers.** The design manager, the sales team, reviewers like Bharat, drafters like Swati - each had a completely different view of the same workflow. We built features for the full pipeline, not just the design step.
+
+**Your product risks map to user realities.** Our product risk matrix flagged "system design accuracy" as the top concern. But watching users manually fudge PVSyst correction factors told a different story - they cared more about speed and flexibility than decimal-point precision. We targeted generation estimates within 3% of PVSyst, but 10x faster. That trade-off would have been scary to make from interviews alone.
+
+**Compare what people say with what they do.** "We need precise 3D modeling" vs. "rough estimations work and the whole building is not required." These contradictions weren't noise — they were signal. Different roles had legitimately different needs. We simplified the modeling interface instead of over-engineering 3D precision.
+
+**Every company thinks they're uniquely right.** Confirmation bias bubbles everywhere. The only fix is to shadow at multiple companies and triangulate. We went on to shadow teams at other EPCs after 4PEL. The patterns that showed up everywhere were the ones we built for. The ones that were company-specific, we didn't.
+
+## A Practical Playbook
+
+If you're building a product and trying to understand your users, here's what I'd suggest.
+
+### When to Interview vs. When to Shadow
+
+**Interview** when you need to understand the landscape. Who are the players? What tools exist? What frustrates people generally? Interviews give you the map. They're great for strategic questions - should we be a marketplace or SaaS? Who's our buyer?
+
+**Shadow** when you need to build the product. What do people actually do? Where do they waste time? What's the real workflow? Shadowing gives you the territory. It tells you what to build and - just as important - what not to build.
+
+Do both. Interviews first to understand the space, then shadowing when you're ready to build.
+
+### How to Set Up a Shadowing Week
+
+**Ask for a week, not a day.** Day 1 is "performing for the guest." People are on their best behavior, showing you the clean version of their workflow. By day 3, they've forgotten you're there. That's when you see reality.
+
+**Bring a notebook, not a laptop.** A laptop creates a barrier. A notebook is non-threatening. You're just scribbling, not recording. People relax.
+
+**Shadow multiple roles.** Don't just watch your target user. Watch the reviewer, the sales team, the project manager. Each role reveals different friction points. The most surprising insights at 4PEL came from Bharat the reviewer and the sales meeting - neither of which I'd have planned for in a traditional research sprint.
+
+**Sit in on meetings you're "not supposed" to be in.** Sales calls, client reviews, internal standups. The handoff points between teams are where the biggest product opportunities hide.
+
+**Don't interrupt. Don't suggest. Just watch and write.** The moment you start helping, you change the workflow. You're there to observe, not consult.
+
+### What to Watch For
+
+**Workarounds they've normalized.** Copy-paste with reference points, manual Excel calculations, toggling layers to delete stray lines. If they're doing it without complaint, it's invisible to them. It shouldn't be invisible to you.
+
+**Time spent on things they don't consider "work."** Formatting, cleanup, verification. At 4PEL, decorative tasks consumed more time than actual design. Nobody would have listed "hatching" as a pain point. But it was the single biggest time sink.
+
+**The gap between what they say and what actually slows them down.** "I hate AutoCAD" is a feeling. The BOM revisions that cascade when an inverter position changes - that's the actual problem.
+
+**Cross-team handoff friction.** Design to sales, creator to reviewer, engineering to construction. Every handoff is a potential product feature.
+
+**Silent errors.** The two missing modules nobody noticed. Errors that compound quietly are the most dangerous kind - and often the most valuable problems to solve.
+
+---
+
+The best products aren't built from surveys or feature requests. They're built by people who cared enough to sit in someone else's chair for a week. Get out of the building. But don't just talk to your users - watch them work.

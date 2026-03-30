@@ -1,0 +1,440 @@
+---
+title: How Software Gets Built Now
+slug: how-software-gets-built-now
+description: >-
+  Two forces are rewiring how software ships. Here's what changes for business leaders, PMs, engineers, and QA - with real company examples, timelines, and trade-offs.
+pillar: build
+format: Guide
+topics:
+  - ai
+  - engineering-culture
+  - developer-tools
+  - product-management
+publishedAt: 2026-03-17
+keywords:
+  - software development process
+  - ai software development
+  - prototype first development
+  - ai product development
+  - software development lifecycle
+---
+
+## The Process Nobody Questioned
+
+Last month, a product manager at a B2B SaaS company built a working prototype in Lovable in about an hour. She put it in front of three customers. By Friday, she'd validated requirements that would have taken six weeks to discover the old way. The feature shipped in half the time.
+
+This is what the new development process looks like. And it's nothing like what most teams are still doing.
+
+For decades, software development followed a process that everyone accepted as given.
+
+```
+BRD -> PRD -> Eng Spec -> Code -> QA -> Release
+```
+
+Someone writes a business requirements document. A product manager translates that into a PRD. Engineers write a technical spec. Then coding. Then QA. Then release.
+
+Each phase existed because the next one was expensive. You wanted to be sure before committing resources.
+
+But here's the uncomfortable truth: this process was never good at building the right thing. It was good at building *something* in an orderly fashion. The linearity created an illusion of progress while the real risk - that you're building something users don't want - sat quietly until the very end.
+
+The numbers bear this out. [Pendo's 2019 feature adoption report](https://www.pendo.io/resources/the-2019-feature-adoption-report/) found that 80% of features in the average software product are rarely or never used. Not because they were built badly. Because they were the wrong features, or they solved the right problem the wrong way.
+
+Two forces are dismantling this process. Understanding them separately - and then together - is the key to understanding how software gets built now.
+
+## Two Forces That Change Everything
+
+### Force 1: Non-Technical People Can Now Build Working Prototypes
+
+Until recently, the only way a product manager could communicate a feature idea was through documents, wireframes, and conversations. The engineer would interpret those artefacts, build something, and weeks later everyone would discover the gaps between what was imagined and what was built.
+
+That gap was the single biggest source of waste in software development. And now it's closing.
+
+Tools like [Replit](https://replit.com/), [Lovable](https://lovable.dev/), [Bolt](https://bolt.new/), and [v0](https://v0.dev/) allow product managers, designers, and business stakeholders to build working, clickable prototypes in hours. Not mockups. Not wireframes. Working applications that users can interact with.
+
+The examples are already concrete:
+
+**Moritz Homann**, Director of Product Innovation at [EQS Group](https://www.eqs.com/) (B2B SaaS, Munich), used Lovable to prototype a data retention management feature. He started with a screenshot of the current platform and prompted Lovable to add new features. The result: a working prototype in about an hour that would have traditionally taken a week. When he showed it to customers, [they thought the feature was already live](https://www.producttalk.org/ai-prototyping-lovable/).
+
+**Miles Skorpen**, Head of Product at Wholesail (fintech), built a working demo with Replit and Plaid APIs in 30 minutes - testing whether wholesale businesses could make smarter trade credit decisions by accessing cash flow data. Instead of waiting weeks for an engineering build, he had something to put in front of customers that afternoon.
+
+**SpotHero's CMO** empowered his marketing team to [build internal tools and prototypes with Replit](https://blog.replit.com/spothero-innovation-through-rapid-prototyping-case-study) - no engineering resources required. The team's mindset shifted from "should we?" to "how soon can we know?"
+
+Replit recognised this shift before most. In January 2025, the company moved away from targeting professional developers and focused instead on non-technical knowledge workers. Revenue grew from roughly $2.8 million ARR in early 2024 to [approximately $150 million by September 2025](https://replit.com/news/funding-announcement), after launching Replit Agent.
+
+[Product School](https://productschool.com/certifications/vibe-coding) now offers a Vibe Coding Certification designed by a Group Product Manager at Spotify in partnership with Lovable. Google, Stripe, and Netflix have started introducing AI-prototyping rounds into PM interview loops. [Carnegie Mellon](https://www.cmu.edu/iii/about/news/2026/how-ai-and-vibe-coding-transform-product-management.html) now requires vibe-coded prototypes instead of basic wireframes in product management courses.
+
+The signal is clear: prototyping is becoming a core PM skill, not an engineering task.
+
+[Reforge framed the shift well](https://www.reforge.com/blog/ai-prototyping-product-development): "This changes what you're asking engineering to do. You're not asking them to interpret your words and build something from imagination. You're showing them the target and asking them to build production-quality code that matches it."
+
+The code these prototypes produce isn't production-quality. It never will be. That's entirely the point.
+
+### Force 2: AI Is Making Developers Far More Productive
+
+The second force is happening inside engineering teams. Agentic AI tools - Claude Code, Cursor, GitHub Copilot, Windsurf - aren't just autocompleting code. They're taking on entire implementation tasks.
+
+I've experienced this firsthand. Building this website, I've used Claude Code for everything from component architecture to test suites. Tasks that would've taken a full day routinely compress into an hour. But the real shift isn't speed - it's that I spend my time on design decisions and system architecture, not on writing boilerplate. The code is the easy part now. Knowing what to build is the hard part.
+
+The industry data backs this up:
+
+- [84% of developers use AI tools](https://survey.stackoverflow.co/2025/). Those tools now write 41% of all code.
+- 25-30% of Microsoft's code is AI-generated, according to [CEO Satya Nadella](https://techcrunch.com/2025/04/29/microsoft-ceo-says-up-to-30-of-the-companys-code-was-written-by-ai/).
+- 25% of Google's code is AI-assisted, according to CEO Sundar Pichai.
+- Developers report 20-25% time savings on common tasks, with 30-50% reductions in full development cycles.
+
+But the real stories are in the case studies.
+
+**Nubank**, the Brazilian fintech, delegated code migrations to [Devin](https://devin.ai/customers/nubank/) - an 8-year-old, multi-million-line ETL monolith. Engineers achieved a 12x efficiency improvement and 20x cost savings. Business units completed migrations in weeks that previously took months or years. The engineers didn't disappear. They shifted to oversight, architecture, and quality validation.
+
+**Gumroad** went further. Devin became their [number one code contributor](https://devin.ai/customers/gumroad) - over 1,500 merged pull requests, averaging 10 per day. CEO Sahil Lavingia reported transforming two-week projects into two-hour implementations.
+
+**Ramp** deployed Devin for automated bug fixes, achieving an [8-minute average bug-to-pull-request time](https://devin.ai/customers/ramp) and up to 80 merged PRs weekly from a small team of AI-savvy engineers.
+
+**Stripe** saw [38% faster feature delivery](https://www.latent.space/p/stripe) using Cursor for frontend work. A pan-EU payment method integration went from roughly two months to two weeks - and the time compression wasn't just from AI coding, but from AI having access to Stripe's internal documentation, API specs, and integration patterns.
+
+Kevin Scott, [Microsoft's CTO](https://www.techspot.com/news/107411-microsoft-cto-predicts-ai-generate-95-percent-code.html), framed the shift precisely: "Authorship is still going to be human. It creates another layer of abstraction - we go from being an input master to a prompt master."
+
+These two forces - non-technical prototyping upstream, AI-assisted development downstream - are independent innovations. But combined, they compress the entire development cycle in a way neither could alone.
+
+## The New Software Development Process
+
+Here's how the process changes when both forces are at work.
+
+### Phase 1: Discovery
+
+```
+┌──────────────── DISCOVERY ────────────────┐
+│                                           │
+│  PM/Designer builds    Users test and     │
+│  throwaway prototype → give feedback ─┐   │
+│       (AI tools)            │         │   │
+│            ↑                │         ↓   │
+│            └─── iterate ────┘  Validated  │
+│                                learning   │
+│                                           │
+│  This prototype is DISPOSABLE.            │
+│  Its only purpose is learning.            │
+└─────────────────────┬─────────────────────┘
+```
+
+**Who does this:** Product manager, designer, or business stakeholder. Not engineers.
+
+**What they produce:** A working prototype that real users have interacted with and given feedback on. The prototype itself will be thrown away. Its value is the learning, not the code.
+
+**How long this takes:** 1-2 weeks, including user feedback cycles.
+
+Jackie Bavaro (author of *Cracking the PM Interview*, former Asana PM) [advocates for a two-pass approach](https://jackiebavaro.substack.com/p/vibe-coding-for-product-managers): "The first version of the app is just a scratch pad or prototype that you intend to throw away, and it's going to be messy - the goal is to surface the big design questions and learn what you want the final product to look like."
+
+Jiaona Zhang, CPO at Laurel (previously Linktree, Webflow), goes further. She argues that GTM teams - sales, support, marketing - should be building prototypes too, because they often have the deepest customer context. Her advice: componentise your design system so non-technical teammates can ship high-fidelity prototypes that look exactly like your product.
+
+Jared Stephens, Product Design Lead at TimelyCare (teletherapy platform, 400+ colleges), kept encountering the same customer problem - proactively identifying students at mental health risk - but never had time to build anything out. Once he started using Lovable, he built a working prototype, collected customer feedback, and had validated requirements before engineering touched it.
+
+One workforce management startup went from idea to validated prototype in 11 days.
+
+I wrote about [how talking to customers](/build/how-to-talk-to-customers) shaped the product at Solar Labs. Prototyping with AI tools is the same principle - getting out of the building and putting something real in front of users - but compressed from weeks to hours.
+
+**Where business leaders cause problems here:**
+
+Business leaders sometimes see a working prototype and ask the obvious question: "It already works, why can't we just ship this?"
+
+The answer: the prototype validated the *what*, not the *how*. It has no authentication, no error handling, no data model, no security, no ability to handle more than a handful of users. Pushing a prototype to production is like furnishing a show home and trying to move a family in. It looks right but the plumbing doesn't work.
+
+The other failure mode is skipping this phase entirely. If the organisation still treats prototyping as "not real work," it'll keep paying the much higher cost of building the wrong thing in production code.
+
+### Phase 2: Definition
+
+```
+┌──────────────── DEFINITION ───────────────┐
+│                                           │
+│  ┌────────────┐   ┌───────────────────┐   │
+│  │ PRD         │   │ Test Strategy     │   │
+│  │             │   │                   │   │
+│  │ - Prototype │   │ QA reviews proto  │   │
+│  │   learnings │   │ + PRD and drafts: │   │
+│  │ - User      │   │                   │   │
+│  │   feedback  │   │ - Acceptance      │   │
+│  │ - Org       │   │   criteria        │   │
+│  │   context   │   │ - Edge cases      │   │
+│  │ - Success   │   │ - Failure modes   │   │
+│  │   metrics   │   │ - Regression      │   │
+│  └──────┬──────┘   └────────┬──────────┘   │
+│         └────────┬──────────┘             │
+│                  ↓                        │
+│      ┌──────────────────────┐             │
+│      │ AI generates test    │             │
+│      │ automation from      │             │
+│      │ plain-language cases │             │
+│      └──────────────────────┘             │
+└─────────────────────┬─────────────────────┘
+```
+
+**Who does this:** Product manager writes the PRD. QA writes test cases. AI generates test automation.
+
+**The PRD is now built on validated evidence.** It's not written from imagination or stakeholder requests alone. It's written from real user feedback on a working prototype, combined with organisational context - technical constraints, compliance requirements, integration points, and past decisions. The PRD author has *seen* users interact with the feature. That changes the quality of every requirement.
+
+**QA enters the process earlier than ever before.** In the traditional model, QA saw the feature after it was built. Now, QA reviews the prototype and the PRD together and drafts test cases before a single line of production code exists.
+
+This is one of the biggest shifts in the entire process. Worth understanding why.
+
+When QA writes test cases from a prototype and a PRD, they're capturing acceptance criteria, edge cases, failure scenarios, and regression risks while the feature is still being defined. These test cases become a contract between product and engineering: "here's what done looks like."
+
+**The test automation pipeline.** Over 40% of QA teams have already adopted AI-powered testing tools. Platforms like [testRigor](https://testrigor.com/) and [Testsigma Copilot](https://testcollab.com/qa-copilot) transform plain-language test descriptions into executable automation. What used to require a QA automation engineer writing Selenium or Playwright code can now start from a spreadsheet of test cases written in plain English.
+
+The results are measurable. [IDT Corporation](https://testrigor.com/case-study-idt/) (Fortune 1000) went from 34% to 91% test automation in under 9 months using testRigor. Each manual QA person built twice as many tests as QA engineers previously did - while still doing manual QA work. Enumerate went from zero test automation to 1,000+ automated tests in six months, saving approximately $180,000 on Selenium setup and new hires.
+
+The time savings compound from two directions:
+1. QA no longer manually opens a browser and clicks through test scenarios
+2. Nobody needs to write the automation code from scratch
+
+A nuance worth stating: this doesn't eliminate the need for QA expertise. Writing good test cases - the ones that catch real bugs - requires deep understanding of user behaviour, system boundaries, and failure modes. AI handles the translation from "what to test" into "how to test it." The human decides what matters. That distinction is everything.
+
+**Where product managers cause problems here:**
+
+The most common failure is writing a PRD that's essentially "make it look like the prototype." The prototype validated the user experience. The PRD needs to go further - data model implications, integration requirements, performance expectations, security considerations, migration strategy. If the PRD reads like a screenshot walkthrough of the prototype, it hasn't done its job.
+
+The second failure is not involving QA at this stage. If QA only sees the feature after it's built, you've recreated the old process with extra steps.
+
+### Phase 3: Delivery
+
+**System design still happens.** Complex features need architectural decisions - database schema, API contracts, service boundaries, integration points. The developer makes these decisions, with AI helping explore options faster. But the judgment about what scales, what's maintainable, and what fits the existing system belongs to the human engineer.
+
+This step can't be skipped. A prototype validates the user experience. System design validates that the experience can be delivered reliably at scale. These are different problems.
+
+**The developer's inputs are far richer.** Instead of a PRD that describes what someone imagines, the developer has:
+- A PRD informed by actual user feedback on a working prototype
+- A test suite that defines "done" before coding begins
+- Organisational context embedded in the PRD and available in knowledge systems
+- The prototype itself as a visual reference
+
+This is the difference between building from a description and building from a validated target. The developer still applies judgment, makes trade-offs, and designs the system. But the ambiguity about *what* to build has shrunk.
+
+**Agentic AI in the development phase.** The developer and AI work together against the test suite. The AI has access to the PRD, the test cases, the existing codebase, and whatever organisational context has been codified. The developer focuses on system design, architectural decisions, code review, and the judgment calls that AI can't make - security trade-offs, performance versus complexity, and how this feature interacts with everything else in the system.
+
+As I wrote in [How to Vibecode Without Destroying Your Codebase](/build/how-to-vibecode-without-destroying-your-codebase), the mental model that works is treating AI like a high-throughput junior engineer: high velocity, but only profitable if review discipline and guardrails keep the quality high.
+
+**QA's new role.** By the time development is complete, the pre-defined test cases should already pass - they were the development target. QA now focuses on exploratory testing: finding edge cases nobody anticipated, testing integration points between systems, identifying UX issues the prototype missed, stress-testing security and performance. Instead of mechanically verifying known scenarios, QA applies expertise to find the unknown unknowns.
+
+**Where engineers cause problems here:**
+
+The biggest risk is treating the prototype as a technical specification. The prototype shows what the user wants to experience. The engineer's job is to design a system that delivers that experience reliably, securely, and at scale. "Just make it look like the prototype" is the wrong framing. "Build a production system that delivers this validated user experience" is the right one.
+
+The second risk is over-relying on AI-generated code without review. AI handles implementation details well but makes architectural mistakes that compound over time. The developer's value is in the judgment layer - reviewing AI output against the system's long-term health.
+
+## A Concrete Walkthrough: Team Invitation Feature
+
+Let's trace a single feature - adding team invitations to a SaaS product - through both processes.
+
+### Old Process
+
+**Week 1-2: Business requirements.** A stakeholder says "we need team invitations." Someone writes a BRD describing the business need, competitive analysis, and expected outcomes.
+
+**Week 3-4: PRD.** The product manager writes a PRD. Email-based invitations. Role selection. Expiry after 7 days. Accept/decline flow. The PM imagines what the UI should look like based on competitor analysis and assumptions.
+
+**Week 5: Engineering spec.** Engineers design the data model, API endpoints, email service integration, and permission system. Questions arise: what happens if someone's invited to two teams? What if they don't have an account yet? The PM answers some of these, defers others.
+
+**Week 6-9: Development.** Engineers build the feature. Halfway through, they realise the PM's flow doesn't account for SSO users, who can't "accept" an invitation in the traditional sense. A redesign conversation happens. Two weeks lost.
+
+**Week 10-11: QA.** QA discovers the invitation email doesn't render correctly on mobile. They find that expired invitations can still be accepted via direct link. These get logged as bugs.
+
+**Week 12: Bug fixes and release.** The feature ships. Users immediately ask for bulk invitations, which was never in scope. A stakeholder mentions they assumed bulk invitations would be included.
+
+**Total: 12 weeks. Two weeks lost to the SSO redesign, one week to bugs that could've been caught earlier.**
+
+### New Process
+
+**Week 1: Discovery.** The PM builds a working prototype in Lovable. It has a simple invitation form, email preview, accept/decline page, and team dashboard showing pending invitations. The PM shares this with three pilot customers.
+
+Feedback: "We need bulk invitations - we're onboarding 50 people at a time." "What about people who already have accounts?" "Can we set different roles for different invitees?" One customer's IT admin asks: "Does this work with SSO?"
+
+The SSO question surfaces in week 1, not week 7.
+
+**Week 2: Definition.** The PM writes the PRD incorporating all feedback. Bulk invitations are in scope from the start. SSO handling is explicitly addressed. The PRD includes what was learned from watching users interact with the prototype - they expected to see invitation status on the team dashboard, not in a separate section.
+
+QA reviews the prototype and PRD, drafts test cases:
+- Single invitation happy path
+- Bulk invitation (50+ users)
+- SSO user invitation flow
+- Expired invitation handling
+- Duplicate invitation prevention
+- Role assignment during bulk invite
+- Email rendering across clients
+- Direct link access after expiry
+
+These test cases are fed into testRigor. An executable test suite exists before development begins.
+
+**Week 3-5: Delivery.** The developer designs the data model and API, noting that bulk invitations need a batch processing approach rather than 50 individual API calls. System design decisions are made: invitation records in the database, an email queue for bulk sends, a permission check that handles both SSO and email-based users.
+
+The developer and agentic AI build against the test suite. The AI has access to the PRD, the test cases, and the existing codebase's authentication patterns. Most implementation is handled by AI with the developer focusing on the batch processing architecture and SSO integration.
+
+**Week 5: QA.** Pre-defined test cases pass. QA does exploratory testing and finds: what happens if someone revokes an invitation while the invitee is in the middle of accepting? A race condition nobody anticipated. It gets fixed.
+
+**Week 6: Release.** The feature ships with bulk invitations, SSO support, and proper edge case handling from day one.
+
+**Total: 6 weeks. No redesign. No surprise gaps. The SSO issue was discovered in week 1, not week 7.**
+
+The time savings aren't just about faster coding. They're about not building the wrong thing and not discovering requirements gaps halfway through implementation.
+
+## What This Means for Each Role
+
+### For Business Leaders
+
+Your role in the new process isn't to build prototypes or write PRDs. It's to create the conditions for this process to work.
+
+**Fund the discovery phase.** Prototyping and user testing aren't optional line items. They're the highest-ROI activity in the entire development cycle because they prevent the most expensive mistake: building the wrong thing.
+
+**Invest in organisational context infrastructure.** The more of your organisation's knowledge - process documents, decision history, compliance requirements, system documentation - that's codified and accessible to AI tools, the better the outputs at every phase. More on this below.
+
+**Measure time-to-validated-learning, not just time-to-ship.** If your team ships fast but builds the wrong thing, speed isn't valuable. If they take an extra week to validate but ship the right thing, that's a better outcome.
+
+Shopify CEO Tobi Lutke made AI usage a ["fundamental expectation" for all employees](https://www.cnbc.com/2025/04/07/shopify-ceo-prove-ai-cant-do-jobs-before-asking-for-more-headcount.html) in his April 2025 internal memo. Managers must now demonstrate why a task can't be done by AI before requesting new headcount. This is the organisational posture that makes the new process work.
+
+**What not to do:** Don't ask "why can't we ship the prototype?" Don't skip the discovery phase because "we already know what users want." You don't. Don't measure engineering productivity by lines of code.
+
+### For Product Managers
+
+The new process makes you more powerful and more accountable. You can now build and validate prototypes yourself. With that power comes responsibility to do it well.
+
+**Learn to prototype.** This isn't optional. Product School's Vibe Coding Certification exists for a reason. Google, Stripe, and Netflix are adding prototyping to PM interview loops. If you can't build a throwaway prototype to validate an idea, you're operating with one hand tied behind your back.
+
+**Write better PRDs because you now have better inputs.** Your PRD should synthesise prototype learnings, user feedback, and organisational context into clear requirements. It should go beyond "what the screen looks like" to address data model implications, integration points, and [guidelines for building software products](/build/guidelines-for-building-software-products) that your engineering team follows.
+
+**Involve QA during the definition phase, not after development.** This is the single biggest process change you can drive. If QA is writing test cases from your PRD and the prototype, you've created a quality contract that exists before engineering begins.
+
+**What not to do:** Don't treat the prototype as a specification. "Make it look like this" isn't a PRD. Don't prototype in isolation - the value is in putting it in front of users. Don't anchor on your own UI design when engineers propose a more reliable approach.
+
+### For Engineers
+
+Your role is shifting from "person who writes code" to "person who designs systems and validates AI output." This isn't a demotion. It's the opposite.
+
+Kevin Scott put it well: "It doesn't mean that the AI is doing the software engineering job. Authorship is still going to be human. It creates another layer of abstraction as we go from being an input master to a prompt master."
+
+The evidence is visible. At Nubank, engineers who delegated migrations to Devin achieved a 12x efficiency improvement - not by writing code faster, but by directing AI and focusing on the decisions AI couldn't make. At Ramp, a small team of AI-savvy engineers saved tens of thousands of engineering hours with an 8-minute average bug-to-PR time.
+
+From the [WorkOS CTO Panel](https://workos.com/blog/cto-panel-ai-transforming-engineering-teams) (Enterprise Ready Conference 2025): junior engineers are now advancing from entry-level to mid-level in 18 months instead of three years. One CTO spent a weekend generating 130 pull requests to upgrade dependencies across the codebase - work the team had estimated would take six months.
+
+**Own system design.** AI can generate code. It can't design a system that's maintainable, secure, and performant over time. Your highest-value contribution is the architectural decisions. I wrote about why this matters in [Your AI Isn't Fixing Your Bugs](/build/ai-debugging-missing-data-layer) - the data layer and system architecture is where AI needs the most human judgment.
+
+**Become an expert code reviewer.** When AI generates 41% of your codebase, reviewing that code for correctness, security, and architectural fit is more important than writing it.
+
+**What not to do:** Don't treat the prototype as a technical spec. Don't abdicate architectural judgment to AI. Don't resist the process change - the prototype gives you better inputs. Use them.
+
+### For QA
+
+Your role is evolving from "person who finds bugs after development" to "person who defines quality before development and discovers unknown unknowns after."
+
+**Write test cases during the definition phase.** Review the prototype and the PRD. Draft acceptance criteria, edge cases, failure scenarios, and regression risks. These test cases become the quality contract for the feature.
+
+**Express test cases in plain language for AI consumption.** Tools like [testRigor](https://testrigor.com/) and Testsigma Copilot transform plain-English test descriptions into executable automation. Your expertise is knowing *what* to test. AI handles the *how*. IDT Corporation's manual QA team went from 34% to 91% test automation in nine months this way.
+
+**Shift exploratory testing to after development.** When pre-defined test cases are automated and passing, focus on the tests nobody thought to write: integration surprises, race conditions, UX inconsistencies, security edge cases, performance under load.
+
+**What not to do:** Don't wait to see the feature until after it's built. Don't over-invest in E2E browser tests - the [testing pyramid](https://martinfowler.com/articles/practical-test-pyramid.html) still applies. Don't assume AI-generated tests are sufficient - the quality of the suite depends on the quality of your test strategy.
+
+## The Organisational Context Multiplier
+
+There's a force multiplier underneath all of this: how much of your organisation's knowledge is codified and accessible.
+
+When an agentic AI tool helps a developer build a feature, it works with whatever context it has. The codebase. The PRD. The test cases. But the quality of its output improves materially when it also has access to how similar features were built before, compliance constraints, integration patterns, past incidents, and team conventions.
+
+This isn't theoretical. Stripe built GoLLM (later replaced by open-source LibraChat integrated with their internal MCP servers), and as of 2025, roughly [8,500 employees per day use LLM tools](https://www.latent.space/p/stripe). Their payment integration time compression - from two months to two weeks - wasn't just AI coding. It was AI having access to internal documentation, API specs, and integration patterns.
+
+The AI knowledge management market grew from $5.23 billion in 2024 to $7.71 billion in 2025, with projections reaching $35.83 billion by 2029. This reflects a real shift: organisational context - the stuff that used to live in people's heads and scattered Slack threads - has become an input to automated systems.
+
+The real opportunity is about building internal tools and ERPs that capture process knowledge as a byproduct of doing the work. Consider a company that builds an internal tool for feature requests. Every request captures who asked, why, what customers it serves, expected impact, and technical constraints. Over time, this accumulates a rich dataset. When a developer starts a new feature, an AI agent can pull relevant history: similar features built, decisions made and why, constraints that apply.
+
+Companies that invest in this aren't just becoming more organised - they're building a compounding advantage. Each decision documented makes the next one faster.
+
+An interesting micro-example is already happening in codebases. Teams now commit configuration files - `CLAUDE.md`, `.cursorrules`, `copilot-instructions.md` - that encode architectural decisions, naming conventions, and tribal knowledge directly into repositories. It's organisational context as code. A small version of the larger pattern: codify your knowledge, make it accessible to AI, and the compound returns follow.
+
+There's an important distinction between **codified context** (documentation, tickets, decisions, test results - AI can consume directly) and **tacit context** (gut feelings, intuition, political realities - lives in people's heads). The new process doesn't eliminate tacit knowledge. What it does is force more context to be written down - in PRDs, test cases, prototype feedback, system design documents - which benefits both AI and future humans.
+
+Organisations already process-driven and tool-heavy will find this transition easier. Those relying on tribal knowledge and verbal agreements will struggle.
+
+## The Full Timeline Comparison
+
+Here's the complete comparison for a medium-complexity feature:
+
+**Traditional Process:**
+
+| Phase | Duration | Primary Risk |
+|---|---|---|
+| BRD | 1-2 weeks | Stakeholder assumptions |
+| PRD | 1-2 weeks | PM assumptions about users |
+| Eng Spec | 1-2 weeks | Translation loss from PRD |
+| Development | 3-6 weeks | Building the wrong thing |
+| QA | 1-3 weeks | Discovering fundamental gaps |
+| Bug fixes | 1-3 weeks | Redesign from late discoveries |
+| Release | 0.5-1 week | Process overhead |
+| **TOTAL** | **9-19 weeks** | **30-50% feature non-adoption** |
+
+**New Process:**
+
+| Phase | Duration | What Changed |
+|---|---|---|
+| Discovery (prototype + user testing) | 1-2 weeks | Prototype + real user feedback validates WHAT to build |
+| Definition (PRD + test cases + AI test gen) | 1-1.5 weeks | PRD from validated insights + QA drafts test cases + AI generates automation |
+| System Design | 0.5-1 week | Still human-owned, AI-assisted |
+| Implementation | 1.5-3 weeks | Dev + AI builds against test suite |
+| Exploratory QA | 0.5-1 week | Only NEW edge cases |
+| Release | 0.5 week | Less rework needed |
+| **TOTAL** | **5-9 weeks** | **~50% reduction + much higher feature-market fit** |
+
+The time savings come from three places:
+
+1. **Not building the wrong thing.** The discovery phase catches requirement gaps before they become expensive redesigns.
+
+2. **AI-accelerated development.** Developers working with agentic AI against a pre-defined test suite build 30-50% faster.
+
+3. **AI-accelerated testing.** Plain-language test cases plus AI-generated automation reduces QA cycle time by 60-80%.
+
+But the bigger win isn't the time. It's that the feature you ship is much more likely to be the right feature.
+
+## What Gets Worse
+
+Every process change has trade-offs. Honest accounting:
+
+**Code coherence over time.** When AI generates a significant portion of the codebase and prototypes set the direction, maintaining architectural consistency takes deliberate effort. I covered this extensively in [How to Vibecode Without Destroying Your Codebase](/build/how-to-vibecode-without-destroying-your-codebase) - the key is treating AI like a high-throughput junior engineer who needs architectural guardrails.
+
+**Junior developer learning.** If AI handles implementation details, how do juniors learn the fundamentals? A [Stanford study](https://time.com/7312205/ai-jobs-stanford/) found that employment among software developers aged 22 to 25 fell nearly 20% between 2022 and 2025. At the same time, experienced developers (30+) saw employment grow 6-12%. AI replaces textbook knowledge but not real-world judgment.
+
+**Debugging AI-generated code.** The [Stack Overflow 2025 Developer Survey](https://survey.stackoverflow.co/2025/) found that 45% of developers say debugging AI-generated code takes more time than expected. Only 29% trust AI output - down 11 points from 2024. The mental model that comes from writing code yourself is absent when AI wrote it.
+
+**Trust calibration.** The [METR randomised controlled trial](https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/) with 16 experienced open-source developers found that AI tools made them 19% *slower* on their own repositories. The developers themselves estimated they were 20% faster. They were wrong. If teams believe they're moving faster when they're not, they may under-invest in review.
+
+**The Klarna warning.** [Klarna deployed AI aggressively](https://www.cnbc.com/2025/05/14/klarna-ceo-says-ai-helped-company-shrink-workforce-by-40percent.html), reducing headcount from 5,527 to 3,422 and deploying an AI assistant handling the workload of 700 employees. CEO Sebastian Siemiatkowski [later admitted](https://www.fastcompany.com/91468582/klarna-tried-to-replace-its-workforce-with-ai) quality suffered, and they began rehiring. The lesson: AI handles volume, but quality requires human judgment in places that are hard to predict in advance.
+
+**Prototype theatre.** The risk of teams building prototypes to check a box rather than genuinely validating with users. If the PM shows a prototype to two internal stakeholders and calls that "user testing," you've added a step without gaining the value.
+
+## Where This Process Doesn't Apply
+
+This process works best for **user-facing feature development** with clear UIs and interaction patterns. Where it breaks down:
+
+**Backend services and APIs** without user-facing components can't be prototyped with tools like Lovable. The discovery phase looks different - technical spikes and performance benchmarking, not user testing.
+
+**Infrastructure and DevOps** - database migrations, CI/CD changes, cloud infrastructure - has no prototype. Spec-first still applies.
+
+**Security-critical systems** - payment processing, authentication, compliance workflows - need more rigorous specification than a prototype provides.
+
+**Highly technical work** - ML model development, algorithm design, systems programming - doesn't fit the prototype-validate-build cycle.
+
+For all of these, the developer role changes are still real (Force 2), even if prototyping (Force 1) doesn't apply. AI-assisted development accelerates implementation regardless of whether a prototype preceded it. The shift from [AI moving beyond dashboards to actually doing the work](/build/ai-beyond-dashboards-doing-the-work) applies across all software domains.
+
+## Getting Started
+
+If you're reading this and thinking "this makes sense but my organisation is nowhere near this," here's a practical starting path.
+
+**Week 1: Try one prototype.** Pick a feature on your roadmap. Have a PM build a throwaway prototype with Lovable, Replit, or Bolt. Don't announce it as an experiment. Just build it and put it in front of two users. Moritz Homann at EQS Group did exactly this and had a working prototype in an hour.
+
+**Week 2: Bring QA into the conversation.** Before the next feature enters development, ask QA to review the PRD and draft test cases. Just test cases - not automation yet. See how this changes the development handoff.
+
+**Week 3: Try AI test generation.** Take the plain-language test cases and feed them into [testRigor](https://testrigor.com/) or Testsigma Copilot. Evaluate whether the generated automation is usable.
+
+**Week 4: Have a developer use agentic AI with a test suite.** Give a developer access to Claude Code or Cursor with the pre-defined test suite as the development target. Measure the difference.
+
+Each step is independently valuable. You don't need to transform your entire process at once. But once you've experienced each step, the full process change will feel obvious rather than radical.
+
+---
+
+The traditional development process was designed for a world where writing code was the bottleneck. That world is gone. The new bottleneck is knowing what to build and defining it clearly enough that both humans and AI can execute on it.
+
+The companies that figure this out first won't just ship faster. They'll ship the right things faster. And in a market where most features go unused, that's the only kind of speed that matters.

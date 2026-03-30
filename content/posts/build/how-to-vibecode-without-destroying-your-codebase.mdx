@@ -1,0 +1,304 @@
+---
+title: 'How to Vibecode Without Destroying Your Codebase'
+slug: how-to-vibecode-without-destroying-your-codebase
+description: >-
+  A synthesis of insights from 70+ engineers, CTOs, and founders on how to use
+  AI coding tools effectively while managing the technical debt they create.
+pillar: build
+format: Guide
+topics:
+  - ai
+  - engineering-culture
+  - developer-tools
+publishedAt: 2026-01-05
+keywords: []
+---
+
+## The Question That's Keeping CTOs Up at Night
+
+You're shipping faster than ever before. Claude Code or GitHub Copilot just built in 3 hours what used to take 3 days. It feels like magic.
+
+But here's the uncomfortable question you need to ask yourself: Is the value you're creating compounding faster than the technical debt you're accumulating?
+
+Dharmesh Shah (founder and CTO at HubSpot) put it well: How do you make sure that the compounding value you are getting from the use of agentic coding exceeds the interest on the technical debt that AI creates along the way?
+
+Shah's hopeful that eventually we'll be able to use AI itself to pay off the technical debt as the models and tooling get better. But until that magical day arrives? We need actual discipline.
+
+This article synthesizes what Shah posted and over 70 responses from battle-tested engineers, CTOs, and founders who are vibecoding in production right now - not in theory, but with real businesses and real consequences.
+
+## The Core Problem: You're Going Fast, But Are You Going Broke?
+
+Here's the tension every practitioner feels. Tian Shi (CTO and AI Researcher) nails it: The real question isn't whether AI introduces technical debt - it clearly does - but whether the rate of compounding execution and learning stays ahead of the interest on that debt.
+
+Think of your codebase like a financial balance sheet. The goal isn't zero debt (that's impossible and honestly, stupid). The goal is making sure your value creation rate exceeds your debt accumulation rate.
+
+Shi's been using these tools daily, and he's noticed four things worth paying attention to:
+
+- **Speed creates optionality.** Agentic tools let you explore more designs, ship faster, learn sooner. That optionality often outweighs whatever imperfect abstractions you're creating. You're buying information, and information is valuable.
+- **Debt becomes visible earlier.** Ironically, when you're iterating faster, architectural issues surface sooner - when they're actually cheaper to fix. Slow development lets problems hide for months. Fast development forces them into the light.
+- **AI-as-maintenance is the bet.** The hope (prayer?) is that the same agents will increasingly handle refactors, tests, migrations, and cleanups. Debt repayment becomes a first-class workflow instead of that sprint we keep postponing.
+- **Human judgment still sets the guardrails.** Clear boundaries - interfaces, invariants, tests, docs - matter more than ever. AI is brilliant at filling in details. Humans still need to define what must not break.
+
+That last one is crucial. Don't forget it.
+
+## The Mental Model That Actually Works
+
+Jayme Welch has the best framework I've heard: Treat agentic coding like a high-throughput junior engineer: high velocity, but only profitable if review discipline and guardrails keep the interest rate low.
+
+This analogy is perfect because it immediately tells you how to manage the situation.
+
+Would you let a brilliant but green junior engineer commit directly to production without review? Of course not. Would you trust them to make architectural decisions? Hell no. Would you give them vague instructions and expect miracles? Only if you enjoy disappointment.
+
+Here's Welch's practical approach that flows from this mental model:
+
+Use small pull requests with strict boundaries. Keep architecture decisions human-owned. Recognize that AI leverage only works if humans stay accountable for intent, architecture, and correctness.
+
+The mental shift here matters. Many people initially treat AI agents like autonomous engineers - capable of independent judgment about what should be built and how. This is a mistake. They're not architects. They're incredibly fast hands that need good direction.
+
+## Three Pillars for Not Shooting Yourself in the Foot
+
+Cong Nguyen (software delivery expert) breaks down how to ensure vibecoding creates value instead of a maintenance nightmare. Three pillars:
+
+### Pillar 1: Shift to Architecture Reviews
+
+Your senior developers shouldn't be checking syntax anymore - AI handles that beautifully. The human role now is ensuring the code actually belongs in your system and supports long-term scalability.
+
+This is a fundamental evolution of code review. You're not proofreading. You're making architectural judgment calls.
+
+### Pillar 2: Automated Guardrails
+
+You cannot govern AI speed with manual human processes. The math doesn't work.
+
+Nguyen's principle is stark: If an agent can't generate its own edge-case tests, it shouldn't be committing.
+
+Test-ability is now more important than the code itself. This creates a forcing function for quality that actually scales with AI velocity.
+
+### Pillar 3: Measure "Cognitive Debt"
+
+Here's a useful concept: Debt is the difficulty of understanding what the AI did.
+
+Nguyen's heuristic: If a dev can't explain the "why" behind an AI-generated logic in 5 minutes, that is "debt" - and you'll pay for it during the first production bug.
+
+This gives you a practical test. Before accepting AI-generated code, can someone on your team explain the reasoning in 5 minutes? No? Then you're accumulating debt you'll pay back with interest later.
+
+## Practical Habits That Keep You Solvent
+
+Let's get specific. Here's what practitioners doing this daily have learned works:
+
+### Create Tests Alongside Features (Not After)
+
+Bora Celik's approach: When you create a feature using AI, before building more, have it write a test. So each AI generated main feature can have its own test.
+
+Run all tests before deploying so AI doesn't accidentally break something that was working. Then ask AI to refactor - reduce code, remove duplicates, ensure functions can be reused.
+
+This pattern - feature, test, refactor - creates a natural rhythm that prevents runaway debt.
+
+### Reduce the Blast Radius
+
+Dinidu de Silva (Head of Security, DevOps Leader) recommends focusing on three areas:
+
+Reduce the blast radius of your functions, modules, and repos. Small, contained failures are manageable. Cascading failures are catastrophic.
+
+Run tests on every commit - unit tests through end-to-end coverage. No exceptions.
+
+Use design patterns that require senior engineers to recognize and instruct the LLM appropriately. The AI should be implementing known patterns, not inventing new ones.
+
+### Treat AI Like You'd Treat Yourself
+
+Sandeep Gokhale's approach with Claude Code: I instruct CC like how I would personally approach if I was doing it by hand.
+
+His checklist:
+
+- Left-shift security and quality (catch problems early)
+- Establish clear patterns on how to do something
+- Practice test-driven development (fail first, then pass)
+- Code review on every line
+
+He emphasizes that fundamentals remain the same, the speed of execution is what has changed.
+
+### Use AI to Pay Down Debt, Not Just Create Features
+
+Vernon Keenan challenges the premise: What is technical debt, anyways? It's the accumulation of undone tasks, such as documentation, refactoring, implementing automated tests, and so on.
+
+His insight? AI coding tools actually give engineers time to address these typically-neglected items.
+
+His checklist:
+
+- Religiously update changelog and documentation files
+- Use DRY principles to create new functions that replace replicated code
+- Generate comprehensive git commit messages
+- Write unit tests
+- Use tools like Playwright for end-to-end tests
+
+The same tool that generates code can document it, test it, and refactor it. Make debt repayment a first-class workflow, not something you'll "get to eventually."
+
+## The Organizational View: This Isn't Just an Engineering Problem
+
+If you're a team lead, engineering manager, or CTO, the challenge extends beyond individual practice to organizational systems.
+
+Chris Hobbick frames it: Compounding only works if the outputs stay legible over time. Once agents start generating code faster than humans can reason about it, debt isn't just technical - it's epistemic.
+
+Translation: If your team can't understand what's been built, you don't have a codebase - you have a liability.
+
+The teams that win treat agentic coding like capital allocation: gated, reviewed, and measured on long-term maintainability, not short-term velocity.
+
+### A Framework for Organizational Governance
+
+Allan Duarte (McKinsey) offers a detailed framework that's actually practical:
+
+**Classify code by half-life.** Prototypes and internal tools can tolerate "vibe code." Core revenue paths, security, and platform primitives cannot. Think of it like building codes - different standards for a garden shed versus a hospital.
+
+**Put guardrails on the long-lived layer:**
+
+- Tests as a release gate (non-negotiable)
+- Small diffs (easier to review, easier to revert)
+- Clear ownership (someone owns this code)
+- No merge without a rollback plan (because you'll need it)
+
+**Run agents as debt collectors, not just feature factories.** Schedule refactor and migration work with measurable burn-down, same as a finance team servicing debt principal.
+
+Duarte's key insight: If you do this, the compounding stays in your favor because you're converting speed into durable assets, not liabilities.
+
+That's the goal. Speed that compounds into value, not speed that compounds into regret.
+
+## The Data Perspective (And It's Not Great)
+
+Youssef Ben Mahmoud (former Hedge Fund CTO, now building a startup) brings actual data to the conversation. He's been tracking the technical debt explosion, referencing a GitClear study on 211 million lines of code.
+
+Honestly, the rate AI generates debt is faster than it fixes it right now.
+
+Ouch. But here's his real insight: The real issue isn't just volume - it's that agentic tools skip refactoring and over-specify for edge cases. We're betting on models improving fast enough to clean up their own mess, but until then, we're probably accumulating 3x the debt we think we are.
+
+So if you think you're accumulating debt at rate X, you might actually be at 3X. Plan accordingly.
+
+## Wait - Is AI Actually Worse Than Humans?
+
+Not everyone agrees that AI-generated code creates more debt than human-generated code. Some contrarian perspectives worth considering:
+
+Praveen R. offers a direct challenge: We already know how to manage technical debt with human written code. Agentic output should not be treated differently simply because it is AI generated.
+
+His point: The real risk isn't that AI creates technical debt - it's pretending it doesn't. If we hold agentic code to the same engineering disciplines we apply today, the compounding value will remain strongly net-positive.
+
+Pablo Gonzalez (developer using AI daily) is even more blunt: Technical debt is also created by humans, and developers hallucinate too. Ever heard of bugs? There's no difference.
+
+Fair point. Humans ship buggy, poorly documented code all the time.
+
+## The Spec-First Approach: Prevention Over Cure
+
+Several practitioners emphasize that the best way to manage technical debt is to prevent it through clearer specifications.
+
+Ian Gotts offers a simple but powerful principle: Focus on bottoming out spec before vibe coding. In this world the spec is the source of truth, not the code.
+
+Think about that. The code is just an implementation detail. The spec is what matters.
+
+Avi Afriat adds: The teams that win won't be the ones using the most AI, but the ones using it with the most clarity. Direction and constraints turn acceleration into compounding.
+
+You can vibecode fast or vibecode carelessly. Only one of those approaches compounds positively.
+
+Paulo Cavallo extends this to team discipline: Treat AI-generated code like code from a brilliant but undocumented contractor. Fast output, but you own the comprehension burden. Skip that step and the interest compounds silently.
+
+That last phrase is the kicker - "the interest compounds silently." You won't notice the debt accumulating until it's already a problem.
+
+## How Tooling and Process Need to Evolve
+
+Several practitioners point to how your development process needs to change to support effective vibecoding.
+
+### Three Key Components
+
+Erin Wiggers shares what's working:
+
+A solid refactor prompt to run every so often on the codebase to reduce bloat and optimize. Make this routine, not exceptional.
+
+Visibility into what's going on with tools like Sentry, LogRocket, and Langfuse. You need observability when things are moving this fast.
+
+A tight feedback loop for users to refine their experience and maximize the value of outcomes. Fast iteration only helps if you're getting signal from users.
+
+### Sub-Agents as Guardrails
+
+Palani RK points to the power of specialized agents: I create a sub-agent council that gets triggered before any PR commit. The goal is to run checks on code quality, security controls, test case validation etc.
+
+Also? Proper project management to log and track any intentional technical debt. If you're consciously taking on debt, at least document it.
+
+### The CI/CD Constraint
+
+Tuhin Kanti Sharma highlights a bottleneck: This is where we need ambient AI to be available to run specific agents to clean up Tech Debt. We are constrained by fast CI/CD; which is a bottleneck for fast feedback loops.
+
+His point: Ambient agents need to run verifiable loops, tests, and deploys to check their work. The tooling infrastructure hasn't caught up to the capabilities yet.
+
+## The Strategic Cost Nobody's Talking About
+
+Stuart Williams raises an often-overlooked concern - the strategic cost of tool lock-in.
+
+Technical debt is serviceable but Optionality debt isn't. When teams optimize within a tool instead of questioning it, the lock-in has already begun.
+
+Here's his warning: Every agent we bind tightly to Tool X narrows future choices, even if the code stays clean. The compounding risk with agentic systems is irreversible commitment. That's the real cost. Freedom.
+
+This adds a strategic dimension to the vibecoding discussion. The fastest path to shipping today might create dependencies that limit your options tomorrow.
+
+The vibecoding landscape is evolving rapidly. Avoid deep lock-in to specific agents or platforms. Keep your options open.
+
+## The Multi-Agent Future
+
+Alok Yadav suggests that the solution to AI-generated problems may be more AI: Just like humans, AI will solve this too. The same way people review, question, and keep each other in check, agents will do the same. One agent builds, another audits and challenges the decisions.
+
+Damien Hughes (founder at Builtlist) agrees: I'm betting that refactoring will be cheap enough to pay down any debt. Indeed, a sub agent focused on assessing debt and assigning refactoring tasks to others seems likely.
+
+This points to an emerging pattern - teams deploy multiple specialized agents. Some build, others test, still others refactor and assess debt.
+
+Will this work? We're about to find out. The teams experimenting with multi-agent workflows will have the answer in 6-12 months.
+
+## How to Actually Vibecode Well
+
+Vibecoding well isn't about abandoning discipline for speed. It's about evolving discipline to match new capabilities.
+
+Here's what works:
+
+### 1. Maintain Clarity on Intent
+
+AI is a force multiplier. But multiplying unclear direction just creates chaos faster.
+
+Invest in specifications, acceptance criteria, and architectural boundaries before engaging AI agents. The clearer your intent, the better the output.
+
+### 2. Implement Automated Guardrails
+
+Human review doesn't scale with AI velocity. The math simply doesn't work.
+
+Build automated test requirements, code quality gates, and security checks that run on every commit. Make the machines enforce what humans can't keep up with.
+
+### 3. Treat AI Like a Brilliant Junior Engineer
+
+High output? Yes. Needs supervision? Also yes. Should make architectural decisions independently? Absolutely not.
+
+Review everything, especially code that affects production systems, security, or core business logic.
+
+### 4. Measure and Manage Cognitive Debt
+
+Can your team explain what the AI built? If not, you're accumulating debt that will compound when something breaks.
+
+Use the 5-minute test: If a developer can't explain the "why" behind AI-generated logic in 5 minutes, that's debt. Decide consciously whether you're willing to accept it.
+
+### 5. Use AI for Maintenance, Not Just Creation
+
+The same tools that generate code can refactor, test, and document it. Make debt repayment a first-class workflow, not something you'll "get to eventually."
+
+Schedule it. Measure it. Make it routine.
+
+### 6. Stay Tool-Agnostic
+
+Don't bind yourself too tightly to specific agents or platforms. The landscape is evolving fast. What's best today might be obsolete in six months.
+
+Keep your codebase portable. Keep your options open.
+
+## The Bottom Line
+
+The promise of vibecoding is real - dramatic acceleration in turning ideas into working software. You can ship in days what used to take weeks.
+
+But as with any leveraged approach, the benefits compound - and so do the mistakes.
+
+The practitioners who build sustainable practices today will be the ones who can sustain high velocity for years, not just months. The ones who vibecode carelessly? They're building codebases that will eventually vibecode them right out of business.
+
+As Ramesh Nuti puts it: AI compounds best where it accelerates leverage, not entropy.
+
+So here's your choice: Vibecode with discipline and create lasting value. Or vibecode carelessly and spend the next two years paying down debt instead of shipping features.
+
+The tools are powerful. Your discipline determines whether that power compounds in your favor or against you.
