@@ -16,21 +16,31 @@ const dateFormatted = new Date(publishedAt).toLocaleDateString('en-US', {
 });
 ---
 
-<li class="flex items-baseline gap-3 py-2">
-  <span
-    class="text-sm shrink-0 font-[family-name:var(--font-mono)] tabular-nums"
-    style="color: var(--color-ink-muted); min-width: 3.5rem;"
-  >
-    {dateFormatted}
-  </span>
-  <a href={href} class="hover:no-underline group flex items-baseline gap-2 leading-snug">
-    <span class="underline decoration-1 underline-offset-3 group-hover:decoration-2">
-      {title}
+<li class="py-2">
+  <div class="flex items-baseline gap-3">
+    <span
+      class="text-sm shrink-0 font-[family-name:var(--font-mono)] tabular-nums"
+      style="color: var(--color-ink-muted); min-width: 3.5rem;"
+    >
+      {dateFormatted}
     </span>
-    {showPillarTag && (
-      <span class={`pillar-tag pillar-tag--${pillar} shrink-0`}>
-        {pillar}
+    <a href={href} class="hover:no-underline group flex items-baseline gap-2 leading-snug">
+      <span class="underline decoration-1 underline-offset-3 group-hover:decoration-2">
+        {title}
       </span>
-    )}
-  </a>
+      {showPillarTag && (
+        <span class={`pillar-tag pillar-tag--${pillar} shrink-0`}>
+          {pillar}
+        </span>
+      )}
+    </a>
+  </div>
+  {description && (
+    <p
+      class="text-sm mt-1 line-clamp-2"
+      style="color: var(--color-ink-muted); margin-left: calc(3.5rem + 0.75rem);"
+    >
+      {description}
+    </p>
+  )}
 </li>

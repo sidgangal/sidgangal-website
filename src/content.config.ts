@@ -10,6 +10,9 @@ const postSchema = z.object({
   topics: z.array(z.string()).optional(),
   publishedAt: z.coerce.date(),
   slug: z.string(),
+  keywords: z.array(z.string()).optional(),
+  updatedAt: z.coerce.date().optional(),
+  coverImage: z.string().optional(),
 });
 
 const build = defineCollection({

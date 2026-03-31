@@ -1,7 +1,9 @@
 ---
 import BaseLayout from './BaseLayout.astro';
+import RelatedPosts from '../components/RelatedPosts.astro';
 import { getReadingTime } from '../utils/reading-time';
 import { detectFAQs, detectHowTo, generateFAQSchema, generateHowToSchema } from '../utils/schema-detection';
+import type { RelatedPost } from '../utils/related-posts';
 
 interface Props {
   title: string;
@@ -14,6 +16,7 @@ interface Props {
   updatedAt?: string;
   coverImage?: string;
   slug?: string;
+  relatedPosts?: RelatedPost[];
 }
 
 const {
@@ -27,6 +30,7 @@ const {
   updatedAt,
   coverImage,
   slug,
+  relatedPosts = [],
 } = Astro.props;
 
 // Compute reading time from raw content
@@ -108,4 +112,5 @@ const dateFormatted = new Date(publishedAt).toLocaleDateString('en-US', {
       <slot />
     </div>
   </article>
+  <RelatedPosts posts={relatedPosts} />
 </BaseLayout>

@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from 'astro:content';
 import PostLayout from '../../layouts/PostLayout.astro';
+import { findRelatedPosts } from '../../utils/related-posts';
 
 // Presentational components (server-rendered, no JS sent to client)
 import SectionDivider from '../../components/finance/mdx/SectionDivider';
@@ -47,6 +48,18 @@ export async function getStaticPaths() {
 
 const { post } = Astro.props;
 const { Content } = await render(post);
+
+const allPosts = [
+  ...await getCollection('build'),
+  ...await getCollection('invest'),
+  ...await getCollection('thrive'),
+];
+const relatedPosts = findRelatedPosts(
+  post.data.slug,
+  'invest',
+  post.data.topics ?? [],
+  allPosts,
+);
 ---
 
 <PostLayout
@@ -60,6 +73,7 @@ const { Content } = await render(post);
   keywords={post.data.keywords}
   updatedAt={post.data.updatedAt?.toISOString()}
   coverImage={post.data.coverImage}
+  relatedPosts={relatedPosts}
 >
   <Content components={financeComponents} />
 </PostLayout>

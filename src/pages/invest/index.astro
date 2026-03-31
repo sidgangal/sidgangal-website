@@ -49,6 +49,7 @@ const yearGroups = groupByYear(posts, entryDate);
               href={`/invest/${post.data.slug}`}
               pillar="invest"
               publishedAt={post.data.publishedAt.toISOString()}
+              description={post.data.description}
               showPillarTag={false}
             />
           ))}
