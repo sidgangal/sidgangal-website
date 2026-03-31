@@ -1,0 +1,45 @@
+---
+import type { RelatedPost } from '../utils/related-posts';
+
+interface Props {
+  posts: RelatedPost[];
+}
+
+const { posts } = Astro.props;
+---
+
+{posts.length > 0 && (
+  <aside class="mt-16 pt-10" style="border-top: 2.5px solid var(--color-ink);">
+    <h2
+      class="text-xl mb-6"
+      style="font-family: var(--font-heading);"
+    >
+      Keep Reading
+    </h2>
+    <ul class="list-none m-0 p-0 space-y-4">
+      {posts.map((post) => (
+        <li>
+          <a
+            href={`/${post.pillar}/${post.slug}`}
+            class="hover:no-underline group"
+          >
+            <span class="flex items-baseline gap-2">
+              <span class="underline decoration-1 underline-offset-3 group-hover:decoration-2">
+                {post.title}
+              </span>
+              <span class={`pillar-tag pillar-tag--${post.pillar} shrink-0`}>
+                {post.pillar}
+              </span>
+            </span>
+            <span
+              class="block text-sm mt-1 line-clamp-2"
+              style="color: var(--color-ink-muted);"
+            >
+              {post.description}
+            </span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </aside>
+)}

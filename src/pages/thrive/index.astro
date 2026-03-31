@@ -49,6 +49,7 @@ const yearGroups = groupByYear(posts, entryDate);
               href={`/thrive/${post.data.slug}`}
               pillar="thrive"
               publishedAt={post.data.publishedAt.toISOString()}
+              description={post.data.description}
               showPillarTag={false}
             />
           ))}
