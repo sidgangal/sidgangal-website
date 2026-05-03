@@ -23,7 +23,9 @@ export function findRelatedPosts(
   allPosts: PostEntry[],
   count = 3,
 ): RelatedPost[] {
-  const candidates = allPosts.filter((p) => p.data.slug !== currentSlug);
+  const candidates = allPosts.filter(
+    (p) => !(p.data.slug === currentSlug && p.data.pillar === currentPillar),
+  );
 
   if (candidates.length === 0) return [];
 
