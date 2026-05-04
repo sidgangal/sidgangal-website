@@ -5,6 +5,7 @@ import yaml from 'yaml';
 import { pillars } from '../content/pillars';
 
 const POSTS_DIR = path.resolve('content/posts');
+const OG_DIR = path.resolve('public/og');
 
 function parseFrontmatter(filePath: string) {
   const content = fs.readFileSync(filePath, 'utf-8');
@@ -48,6 +49,13 @@ describe('content route integrity', () => {
     for (const post of getPostFiles()) {
       const frontmatter = parseFrontmatter(post.filePath);
       expect(frontmatter.pillar, post.file).toBe(post.pillar);
+    }
+  });
+
+  test('has an OG image for every post route', () => {
+    for (const post of getPostFiles()) {
+      const imagePath = path.join(OG_DIR, post.pillar, `${post.routeSlug}.png`);
+      expect(fs.existsSync(imagePath), imagePath).toBe(true);
     }
   });
 });
