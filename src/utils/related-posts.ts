@@ -1,14 +1,17 @@
+import type { Pillar } from '../content/pillars';
+import { getEntrySlug } from './content';
+
 export interface RelatedPost {
   title: string;
   slug: string;
-  pillar: 'build' | 'invest' | 'thrive';
+  pillar: Pillar;
   description: string;
 }
 
 interface PostEntry {
+  id: string;
   data: {
-    slug: string;
-    pillar: string;
+    pillar: Pillar;
     topics?: string[];
     title: string;
     description: string;
@@ -18,13 +21,13 @@ interface PostEntry {
 
 export function findRelatedPosts(
   currentSlug: string,
-  currentPillar: string,
+  currentPillar: Pillar,
   currentTopics: string[],
   allPosts: PostEntry[],
   count = 3,
 ): RelatedPost[] {
   const candidates = allPosts.filter(
-    (p) => !(p.data.slug === currentSlug && p.data.pillar === currentPillar),
+    (post) => !(getEntrySlug(post) === currentSlug && post.data.pillar === currentPillar),
   );
 
   if (candidates.length === 0) return [];
@@ -51,8 +54,8 @@ export function findRelatedPosts(
 
   return pool.slice(0, count).map(({ post }) => ({
     title: post.data.title,
-    slug: post.data.slug,
-    pillar: post.data.pillar as RelatedPost['pillar'],
+    slug: getEntrySlug(post),
+    pillar: post.data.pillar,
     description: post.data.description,
   }));
 }

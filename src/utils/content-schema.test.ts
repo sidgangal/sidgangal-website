@@ -14,29 +14,28 @@ function getPostSchema() {
   // This mirrors what content.config.ts SHOULD have
   return z.object({
     title: z.string(),
-    description: z.string(),
-    pillar: z.enum(['build', 'invest', 'thrive']),
-    format: z.string().optional(),
-    topics: z.array(z.string()).optional(),
-    publishedAt: z.coerce.date(),
-    slug: z.string(),
-    keywords: z.array(z.string()).optional(),
-    updatedAt: z.coerce.date().optional(),
-    coverImage: z.string().optional(),
-  });
-}
+	    description: z.string(),
+	    pillar: z.enum(['build', 'invest', 'thrive']),
+	    format: z.string(),
+	    topics: z.array(z.string()).default([]),
+	    publishedAt: z.coerce.date(),
+	    keywords: z.array(z.string()).optional(),
+	    updatedAt: z.coerce.date().optional(),
+	    coverImage: z.union([z.string().regex(/^\/.+/), z.literal('')]).optional(),
+	  });
+	}
 
 describe('postSchema preserves SEO-critical fields', () => {
   const schema = getPostSchema();
 
   test('preserves keywords array through parsing', () => {
     const input = {
-      title: 'Test Article',
-      description: 'A test',
-      pillar: 'build',
-      slug: 'test-article',
-      publishedAt: '2025-06-15',
-      keywords: ['software development', 'ai tools', 'productivity'],
+	      title: 'Test Article',
+	      description: 'A test',
+	      pillar: 'build',
+	      format: 'Guide',
+	      publishedAt: '2025-06-15',
+	      keywords: ['software development', 'ai tools', 'productivity'],
     };
 
     const result = schema.parse(input);
@@ -45,12 +44,12 @@ describe('postSchema preserves SEO-critical fields', () => {
 
   test('preserves updatedAt date through parsing', () => {
     const input = {
-      title: 'Test Article',
-      description: 'A test',
-      pillar: 'invest',
-      slug: 'test-article',
-      publishedAt: '2025-06-15',
-      updatedAt: '2025-07-20',
+	      title: 'Test Article',
+	      description: 'A test',
+	      pillar: 'invest',
+	      format: 'Guide',
+	      publishedAt: '2025-06-15',
+	      updatedAt: '2025-07-20',
     };
 
     const result = schema.parse(input);
@@ -60,12 +59,12 @@ describe('postSchema preserves SEO-critical fields', () => {
 
   test('preserves coverImage string through parsing', () => {
     const input = {
-      title: 'Test Article',
-      description: 'A test',
-      pillar: 'thrive',
-      slug: 'test-article',
-      publishedAt: '2025-06-15',
-      coverImage: '/og/thrive/test-article.png',
+	      title: 'Test Article',
+	      description: 'A test',
+	      pillar: 'thrive',
+	      format: 'Guide',
+	      publishedAt: '2025-06-15',
+	      coverImage: '/og/thrive/test-article.png',
     };
 
     const result = schema.parse(input);
@@ -74,11 +73,11 @@ describe('postSchema preserves SEO-critical fields', () => {
 
   test('all three SEO fields are optional', () => {
     const input = {
-      title: 'Minimal Article',
-      description: 'No optional fields',
-      pillar: 'build',
-      slug: 'minimal',
-      publishedAt: '2025-01-01',
+	      title: 'Minimal Article',
+	      description: 'No optional fields',
+	      pillar: 'build',
+	      format: 'Guide',
+	      publishedAt: '2025-01-01',
     };
 
     const result = schema.parse(input);

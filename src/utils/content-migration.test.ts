@@ -90,10 +90,10 @@ describe('Content Migration: Frontmatter validation', () => {
         expect(fm.title.length).toBeGreaterThan(0);
       });
 
-      test('slug matches filename', () => {
+      test('does not use legacy frontmatter slug', () => {
         const content = fs.readFileSync(filePath, 'utf-8');
         const fm = parseFrontmatter(content);
-        expect(fm.slug).toBe(article.slug);
+        expect(fm.slug).toBeUndefined();
       });
 
       test('pillar is build', () => {

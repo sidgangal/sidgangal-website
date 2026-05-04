@@ -11,7 +11,8 @@ function makePost(
   description = `Description for ${slug}`,
 ): PostEntry {
   return {
-    data: { slug, pillar, topics, title, description, publishedAt: new Date('2025-06-15') },
+    id: slug,
+    data: { pillar, topics, title, description, publishedAt: new Date('2025-06-15') },
   };
 }
 

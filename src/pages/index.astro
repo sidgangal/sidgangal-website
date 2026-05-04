@@ -6,6 +6,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/Hero.astro';
 import PostCard from '../components/PostCard.astro';
 import PillarSection from '../components/PillarSection.astro';
+import { getEntrySlug, getPostHref } from '../utils/content';
 import { sortByDate, groupByYear } from '../utils/posts';
 
 const reader = createReader(process.cwd(), keystaticConfig);
@@ -27,7 +28,7 @@ const recentYearGroups = groupByYear(allPosts, entryDate);
 function toPost(entry: typeof allPosts[number]) {
   return {
     title: entry.data.title,
-    slug: entry.data.slug,
+    slug: getEntrySlug(entry),
     pillar: entry.data.pillar,
     publishedAt: entry.data.publishedAt.toISOString(),
   };
@@ -61,7 +62,7 @@ function toPost(entry: typeof allPosts[number]) {
           {group.posts.map((post) => (
             <PostCard
               title={post.data.title}
-              href={`/${post.data.pillar}/${post.data.slug}`}
+              href={getPostHref(post)}
               pillar={post.data.pillar}
               publishedAt={post.data.publishedAt.toISOString()}
             />

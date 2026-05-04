@@ -2,6 +2,7 @@
 import { getCollection, render } from 'astro:content';
 import PostLayout from '../../layouts/PostLayout.astro';
 import { findRelatedPosts } from '../../utils/related-posts';
+import { getEntrySlug } from '../../utils/content';
 
 // Presentational components (server-rendered, no JS sent to client)
 import SectionDivider from '../../components/finance/mdx/SectionDivider';
@@ -41,12 +42,13 @@ const financeComponents = {
 export async function getStaticPaths() {
   const posts = await getCollection('invest');
   return posts.map((post) => ({
-    params: { slug: post.data.slug },
+    params: { slug: getEntrySlug(post) },
     props: { post },
   }));
 }
 
 const { post } = Astro.props;
+const slug = getEntrySlug(post);
 const { Content } = await render(post);
 
 const allPosts = [
@@ -55,7 +57,7 @@ const allPosts = [
   ...await getCollection('thrive'),
 ];
 const relatedPosts = findRelatedPosts(
-  post.data.slug,
+  slug,
   'invest',
   post.data.topics ?? [],
   allPosts,
@@ -69,7 +71,7 @@ const relatedPosts = findRelatedPosts(
   publishedAt={post.data.publishedAt.toISOString()}
   topics={post.data.topics}
   content={post.body}
-  slug={post.data.slug}
+  slug={slug}
   keywords={post.data.keywords}
   updatedAt={post.data.updatedAt?.toISOString()}
   coverImage={post.data.coverImage}

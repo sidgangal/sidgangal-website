@@ -134,7 +134,7 @@ async function generatePostOGImage(title, pillar, slug) {
 }
 
 /**
- * Parse frontmatter from an MDX file to extract title, slug, and pillar.
+ * Parse frontmatter from an MDX file to extract title and pillar.
  */
 function parseFrontmatter(content) {
   const match = content.match(/^---\n([\s\S]*?)\n---/);
@@ -150,7 +150,6 @@ function parseFrontmatter(content) {
 
   return {
     title: get('title'),
-    slug: get('slug'),
     pillar: get('pillar'),
   };
 }
@@ -168,13 +167,14 @@ async function generatePostImages() {
     for (const file of files) {
       const content = fs.readFileSync(path.join(pillarDir, file), 'utf-8');
       const meta = parseFrontmatter(content);
+      const slug = path.basename(file, path.extname(file));
 
-      if (!meta?.title || !meta?.slug) {
-        console.warn(`Skipping ${pillar}/${file}: missing title or slug`);
+      if (!meta?.title) {
+        console.warn(`Skipping ${pillar}/${file}: missing title`);
         continue;
       }
 
-      await generatePostOGImage(meta.title, pillar, meta.slug);
+      await generatePostOGImage(meta.title, pillar, slug);
       count++;
     }
   }

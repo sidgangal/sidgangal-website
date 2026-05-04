@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PostCard from '../../components/PostCard.astro';
+import { getEntrySlug } from '../../utils/content';
 import { sortByDate, groupByYear } from '../../utils/posts';
 
 const entryDate = (p: any) => p.data.publishedAt;
@@ -43,7 +44,7 @@ const yearGroups = groupByYear(posts, entryDate);
           {group.posts.map((post) => (
             <PostCard
               title={post.data.title}
-              href={`/build/${post.data.slug}`}
+              href={`/build/${getEntrySlug(post)}`}
               pillar="build"
               publishedAt={post.data.publishedAt.toISOString()}
               description={post.data.description}

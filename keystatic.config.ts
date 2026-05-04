@@ -1,11 +1,6 @@
 import { config, fields, collection, singleton } from '@keystatic/core';
 import { block, wrapper } from '@keystatic/core/content-components';
-
-const pillarOptions = [
-  { label: 'Build', value: 'build' },
-  { label: 'Invest', value: 'invest' },
-  { label: 'Thrive', value: 'thrive' },
-] as const;
+import { pillarOptions, type Pillar } from './src/content/pillars';
 
 const colorOption = fields.select({
   label: 'Color',
@@ -96,7 +91,7 @@ const financeComponents = {
   }),
 };
 
-function postCollection(pillar: string) {
+function postCollection(pillar: Pillar, components?: typeof financeComponents) {
   return collection({
     label: pillar.charAt(0).toUpperCase() + pillar.slice(1),
     slugField: 'title',
@@ -105,7 +100,6 @@ function postCollection(pillar: string) {
     entryLayout: 'content',
     schema: {
       title: fields.slug({ name: { label: 'Title' } }),
-      slug: fields.text({ label: 'Slug' }),
       description: fields.text({
         label: 'Description',
         multiline: true,
@@ -136,7 +130,7 @@ function postCollection(pillar: string) {
       }),
       content: fields.mdx({
         label: 'Content',
-        components: financeComponents,
+        ...(components ? { components } : {}),
       }),
     },
   });
@@ -146,7 +140,7 @@ export default config({
   storage: { kind: 'local' },
   collections: {
     build: postCollection('build'),
-    invest: postCollection('invest'),
+    invest: postCollection('invest', financeComponents),
     thrive: postCollection('thrive'),
   },
   singletons: {
